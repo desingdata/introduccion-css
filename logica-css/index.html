@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lógica en CSS</title>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;600;800&display=swap" rel="stylesheet" />
+  <link rel="icon" href="https://desingdata.github.io/desingdata/img/DesingData_favicon-96x96.png" sizes="96x96" type="image/png">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+  <!-- ============================================================
+       NAVBAR
+       Incluye: logo, links, toggle de tema y botón hamburguesa.
+  ============================================================ -->
+  <nav>
+    <span class="nav-logo">.css{ logic }</span>
+
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#conceptos">Conceptos</a></li>
+      <li><a href="#selectores">Selectores</a></li>
+      <li><a href="#layouts">Layouts</a></li>
+      <li><a href="#animaciones">Animaciones</a></li>
+    </ul>
+
+    <div class="nav-controls">
+      <!-- Botón para alternar entre modo claro y oscuro -->
+      <button class="btn-theme" id="themeToggle" aria-label="Cambiar tema">🌙</button>
+
+      <!-- Hamburguesa: visible solo en mobile -->
+      <button class="hamburger" id="hamburger" aria-label="Menú" aria-expanded="false">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <header class="hero">
+    <div>
+      <p class="hero-tag">// Proyecto Educativo</p>
+      <h1>Lógica en <em>CSS</em></h1>
+      <p>Variables, selectores, layouts, animaciones y responsive design explicados con ejemplos en vivo.</p>
+    </div>
+  </header>
+
+  <main class="container">
+
+    <!-- ============================================================
+         SECCIÓN 1 — CONCEPTOS FUNDAMENTALES
+    ============================================================ -->
+    <section id="conceptos">
+      <p class="section-label">01 — Conceptos Fundamentales</p>
+
+      <div class="cards-grid">
+
+        <!-- TARJETA 1: Variables -->
+        <article class="card">
+          <span class="card-num">01</span>
+          <h3>Custom Properties</h3>
+          <p class="desc">Variables nativas del navegador definidas con <code>--nombre</code> y usadas con <code>var(--nombre)</code>. Permiten centralizar valores y cambiar el tema completo.</p>
+          <div class="code-block"><span class="cm">/* Definición */</span>
+<span class="kw">:root</span> {
+  <span class="prop">--color-primario</span>: <span class="val">#e63946</span>;
+  <span class="prop">--espaciado</span>: <span class="val">1.5rem</span>;
+}
+<span class="cm">/* Uso */</span>
+<span class="kw">.btn</span> {
+  <span class="prop">background</span>: <span class="val">var(--color-primario)</span>;
+  <span class="prop">padding</span>: <span class="val">var(--espaciado)</span>;
+}</div>
+        </article>
+
+        <!-- TARJETA 2: Cascada -->
+        <article class="card">
+          <span class="card-num">02</span>
+          <h3>La Cascada</h3>
+          <p class="desc">CSS evalúa reglas por <strong>especificidad</strong>, <strong>orden</strong> y <strong>origen</strong>. El estilo más específico gana. Inline > ID > Clase > Elemento.</p>
+          <div class="code-block"><span class="cm">/* Especificidad: 0-0-1 */</span>
+<span class="kw">p</span> { <span class="prop">color</span>: <span class="val">gray</span>; }
+
+<span class="cm">/* Especificidad: 0-1-0 → gana */</span>
+<span class="kw">.texto</span> { <span class="prop">color</span>: <span class="val">red</span>; }
+
+<span class="cm">/* Especificidad: 1-0-0 → gana más */</span>
+<span class="kw">#titulo</span> { <span class="prop">color</span>: <span class="val">blue</span>; }</div>
+        </article>
+
+        <!-- TARJETA 3: Herencia -->
+        <article class="card">
+          <span class="card-num">03</span>
+          <h3>Herencia</h3>
+          <p class="desc">Propiedades como <code>color</code> y <code>font-family</code> se heredan del padre al hijo automáticamente. Otras como <code>border</code> no se heredan.</p>
+          <div class="code-block"><span class="kw">body</span> {
+  <span class="cm">/* Todos los hijos heredan */</span>
+  <span class="prop">font-family</span>: <span class="val">'Syne', sans-serif</span>;
+  <span class="prop">color</span>: <span class="val">#1a1a1a</span>;
+}
+<span class="kw">.hijo</span> {
+  <span class="cm">/* Forzar herencia de border */</span>
+  <span class="prop">border</span>: <span class="val">inherit</span>;
+}</div>
+        </article>
+
+        <!-- TARJETA 4: Box Model -->
+        <article class="card">
+          <span class="card-num">04</span>
+          <h3>Box Model</h3>
+          <p class="desc">Todo elemento es una caja: <code>content → padding → border → margin</code>. Con <code>box-sizing: border-box</code>, el padding no agranda el elemento.</p>
+          <div class="code-block"><span class="kw">*, *::before, *::after</span> {
+  <span class="cm">/* padding y border incluidos */</span>
+  <span class="prop">box-sizing</span>: <span class="val">border-box</span>;
+}
+<span class="kw">.caja</span> {
+  <span class="prop">width</span>: <span class="val">200px</span>;
+  <span class="prop">padding</span>: <span class="val">20px</span>;
+  <span class="prop">border</span>: <span class="val">2px solid red</span>;
+  <span class="cm">/* Sigue midiendo 200px */</span>
+}</div>
+        </article>
+
+        <!-- TARJETA 5: Unidades -->
+        <article class="card">
+          <span class="card-num">05</span>
+          <h3>Unidades CSS</h3>
+          <p class="desc"><code>rem</code> relativa a la raíz, <code>em</code> al padre, <code>vw/vh</code> al viewport, <code>%</code> al contenedor. <code>clamp()</code> crea valores fluidos con límites.</p>
+          <div class="code-block"><span class="kw">h1</span> {
+  <span class="cm">/* Mínimo 2rem, ideal 5vw, máx 4rem */</span>
+  <span class="prop">font-size</span>: <span class="val">clamp(2rem, 5vw, 4rem)</span>;
+}
+<span class="kw">.hero</span> {
+  <span class="prop">height</span>: <span class="val">100vh</span>; <span class="cm">/* altura del viewport */</span>
+  <span class="prop">padding</span>: <span class="val">2rem</span>;  <span class="cm">/* relativa a :root */</span>
+}</div>
+        </article>
+
+        <!-- TARJETA 6: calc() -->
+        <article class="card">
+          <span class="card-num">06</span>
+          <h3>calc() y Funciones</h3>
+          <p class="desc"><code>calc()</code> mezcla unidades: <code>calc(100% - 2rem)</code>. <code>min()</code>, <code>max()</code> y <code>clamp()</code> son funciones de comparación nativas.</p>
+          <div class="code-block"><span class="kw">.sidebar</span> {
+  <span class="cm">/* 100% del padre menos 300px */</span>
+  <span class="prop">width</span>: <span class="val">calc(100% - 300px)</span>;
+}
+<span class="kw">.img</span> {
+  <span class="cm">/* máximo 400px, pero no más del 100% */</span>
+  <span class="prop">width</span>: <span class="val">min(400px, 100%)</span>;
+}</div>
+        </article>
+
+      </div>
+    </section>
+
+    <!-- ============================================================
+         SECCIÓN 2 — SELECTORES AVANZADOS (DEMO INTERACTIVA)
+    ============================================================ -->
+    <section id="selectores" class="demo-section" style="margin-top:4rem">
+      <p class="section-label">02 — Selectores Avanzados (interactivo)</p>
+
+      <div class="demo-grid">
+
+        <!-- :hover -->
+        <div class="demo-box hover-demo">
+          <span class="demo-label">:hover</span>
+          <p class="demo-title">Pasa el cursor aquí</p>
+          <p style="font-size:0.8rem;color:var(--muted)">El selector <code>:hover</code> aplica estilos cuando el puntero está encima del elemento.</p>
+        </div>
+
+        <!-- :focus-within -->
+        <div class="demo-box focus-demo">
+          <span class="demo-label">:focus-within</span>
+          <p class="demo-title">Haz clic en el input</p>
+          <input class="demo-input" type="text" placeholder="Escribe algo..." />
+          <p style="font-size:0.8rem;color:var(--muted);margin-top:0.5rem"><code>:focus-within</code> activa el padre cuando algún hijo tiene foco.</p>
+        </div>
+
+        <!-- :nth-child -->
+        <div class="demo-box">
+          <span class="demo-label">:nth-child(odd/even)</span>
+          <p class="demo-title">Filas alternadas</p>
+          <ul class="nth-list">
+            <li>Elemento 1 (impar)</li>
+            <li>Elemento 2 (par)</li>
+            <li>Elemento 3 (impar)</li>
+            <li>Elemento 4 (par)</li>
+          </ul>
+        </div>
+
+        <!-- :not -->
+        <div class="demo-box">
+          <span class="demo-label">:not()</span>
+          <p class="demo-title">Excluir elementos</p>
+          <ul class="not-list">
+            <li>Opción activa</li>
+            <li class="disabled">Opción deshabilitada</li>
+            <li>Opción activa</li>
+            <li class="disabled">Opción deshabilitada</li>
+          </ul>
+          <p style="font-size:0.8rem;color:var(--muted);margin-top:0.5rem"><code>:not(.disabled)</code> selecciona todos los elementos sin esa clase.</p>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ============================================================
+         SECCIÓN 3 — FLEXBOX vs GRID
+    ============================================================ -->
+    <section id="layouts" class="layout-section">
+      <p class="section-label">03 — Flexbox vs CSS Grid</p>
+
+      <div class="cards-grid" style="margin-bottom:1.5rem">
+        <article class="card" style="animation-delay:0s">
+          <span class="card-num">flex</span>
+          <h3>Flexbox — 1 dimensión</h3>
+          <p class="desc">Distribuye elementos en una fila o columna. Ideal para componentes, navbars, y alinear ítems. <code>flex-grow</code>, <code>flex-shrink</code>, <code>flex-wrap</code>.</p>
+        </article>
+        <article class="card" style="animation-delay:0.05s">
+          <span class="card-num">grid</span>
+          <h3>CSS Grid — 2 dimensiones</h3>
+          <p class="desc">Define filas <em>y</em> columnas simultáneamente. Perfecto para layouts de página, galerías y dashboards. <code>grid-template-columns</code>, <code>grid-column: span N</code>.</p>
+        </article>
+      </div>
+
+      <!-- Demo Flexbox -->
+      <p style="font-size:0.8rem;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:var(--muted);margin-bottom:0.25rem">Demo — Flexbox</p>
+      <div class="flex-demo">
+        <div class="flex-item">Item A</div>
+        <div class="flex-item grow">Item B (grow)</div>
+        <div class="flex-item">Item C</div>
+        <div class="flex-item">Item D</div>
+        <div class="flex-item grow">Item E (grow)</div>
+      </div>
+
+      <!-- Demo Grid -->
+      <p style="font-size:0.8rem;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:var(--muted);margin:1.5rem 0 0.25rem">Demo — CSS Grid (2fr + 1fr + 1fr)</p>
+      <div class="grid-demo">
+        <div class="grid-item">Col 1 (2fr)</div>
+        <div class="grid-item">Col 2 (1fr)</div>
+        <div class="grid-item">Col 3 (1fr)</div>
+        <div class="grid-item span2">span 2 columnas</div>
+        <div class="grid-item">Col 3</div>
+        <div class="grid-item full">span todas (1 / -1)</div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         SECCIÓN 4 — ANIMACIONES (hover para activar)
+    ============================================================ -->
+    <section id="animaciones" class="anim-section">
+      <p class="section-label">04 — Animaciones (@keyframes)</p>
+
+      <div class="anim-grid">
+
+        <div class="anim-box">
+          <span class="demo-label">pulsar (scale + opacity)</span>
+          <p class="demo-title">Hover para animar</p>
+          <div class="anim-ball"></div>
+          <p style="font-size:0.75rem;color:var(--muted);margin-top:0.5rem"><code>animation: pulsar 0.8s infinite</code></p>
+        </div>
+
+        <div class="anim-box">
+          <span class="demo-label">cargar (width 0→100%)</span>
+          <p class="demo-title">Hover para cargar</p>
+          <div class="anim-bar"></div>
+          <p style="font-size:0.75rem;color:var(--muted);margin-top:0.5rem"><code>animation: cargar 1s forwards</code></p>
+        </div>
+
+        <div class="anim-box">
+          <span class="demo-label">deslizar (translateX)</span>
+          <p class="demo-title">Hover para revelar</p>
+          <div class="anim-slide">¡Aparecí! ✨</div>
+          <p style="font-size:0.75rem;color:var(--muted);margin-top:0.5rem"><code>animation: deslizar 0.5s forwards</code></p>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ============================================================
+         SECCIÓN 5 — MEDIA QUERIES (información)
+    ============================================================ -->
+    <section style="margin-top:4rem">
+      <p class="section-label">05 — Responsive Design</p>
+      <div class="cards-grid">
+        <article class="card" style="animation-delay:0s">
+          <span class="card-num">@media</span>
+          <h3>Media Queries</h3>
+          <p class="desc">Aplican estilos condicionalmente según el ancho de pantalla. La estrategia <strong>mobile-first</strong> escribe los estilos base para móvil y añade complejidad hacia arriba.</p>
+          <div class="code-block"><span class="cm">/* Mobile first base */</span>
+<span class="kw">.grid</span> { <span class="prop">columns</span>: <span class="val">1</span>; }
+
+<span class="cm">/* Tablet → 2 columnas */</span>
+<span class="kw">@media (min-width: 600px)</span> {
+  <span class="kw">.grid</span> { <span class="prop">columns</span>: <span class="val">2</span>; }
+}
+<span class="cm">/* Desktop → 3 columnas */</span>
+<span class="kw">@media (min-width: 1024px)</span> {
+  <span class="kw">.grid</span> { <span class="prop">columns</span>: <span class="val">3</span>; }
+}</div>
+        </article>
+
+        <article class="card" style="animation-delay:0.05s">
+          <span class="card-num">tema</span>
+          <h3>prefers-color-scheme</h3>
+          <p class="desc">Detecta la preferencia del sistema operativo para modo oscuro o claro. Se combina con Custom Properties para un cambio de tema automático.</p>
+          <div class="code-block"><span class="cm">/* Se activa si el OS usa dark */</span>
+<span class="kw">@media (prefers-color-scheme: dark)</span> {
+  <span class="kw">:root</span> {
+    <span class="prop">--bg</span>: <span class="val">#0f0f13</span>;
+    <span class="prop">--text</span>: <span class="val">#e8e0d5</span>;
+  }
+}</div>
+        </article>
+
+        <article class="card" style="animation-delay:0.10s">
+          <span class="card-num">print</span>
+          <h3>Otros Media Types</h3>
+          <p class="desc">Además de <code>screen</code>, existen <code>print</code> para impresión, y features como <code>prefers-reduced-motion</code> para accesibilidad.</p>
+          <div class="code-block"><span class="cm">/* Ocultar nav al imprimir */</span>
+<span class="kw">@media print</span> {
+  <span class="kw">nav, footer</span> { <span class="prop">display</span>: <span class="val">none</span>; }
+}
+<span class="cm">/* Respetar preferencia accesible */</span>
+<span class="kw">@media (prefers-reduced-motion)</span> {
+  <span class="kw">*</span> { <span class="prop">animation</span>: <span class="val">none</span>!important; }
+}</div>
+        </article>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <span class="footer-tag">
+        <a style="text-decoration: none;" href="https://desingdata.github.io/desingdata/" target="_blank">Desing Data</a> 2026
+    </span> 
+    <span class="footer-tag">
+         ·By <a style="text-decoration: none;" href="https://miguelmauricioriveralopez18686.github.io/mrlPortafolio/" target="_blank">
+      Miguel Mauricio Rivera López</a>.
+    </span>
+  </footer>
+
+  
+  <script>
+    /* -------- HAMBURGUESA -------- */
+    const hamburger  = document.getElementById('hamburger');
+    const navLinks   = document.getElementById('navLinks');
+
+    hamburger.addEventListener('click', () => {
+      // Alterna clases activas
+      hamburger.classList.toggle('active');
+      navLinks.classList.toggle('open');
+      // Accesibilidad: aria-expanded
+      const expanded = hamburger.getAttribute('aria-expanded') === 'true';
+      hamburger.setAttribute('aria-expanded', !expanded);
+    });
+
+    // Cerrar menú al hacer clic en un enlace (mobile UX)
+    navLinks.querySelectorAll('a').forEach(a => {
+      a.addEventListener('click', () => {
+        hamburger.classList.remove('active');
+        navLinks.classList.remove('open');
+        hamburger.setAttribute('aria-expanded', 'false');
+      });
+    });
+
+    /* -------- CAMBIO DE TEMA -------- */
+    const themeToggle = document.getElementById('themeToggle');
+    const html        = document.documentElement;
+
+    themeToggle.addEventListener('click', () => {
+      const isDark = html.getAttribute('data-theme') === 'dark';
+      html.setAttribute('data-theme', isDark ? 'light' : 'dark');
+      // Cambia el ícono del botón
+      themeToggle.textContent = isDark ? '🌙' : '☀️';
+    });
+
+    // Detectar preferencia del sistema al cargar
+    if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+      html.setAttribute('data-theme', 'dark');
+      themeToggle.textContent = '☀️';
+    }
+  </script>
+
+</body>
+</html>
