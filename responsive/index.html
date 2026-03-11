@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Responsive en Introducción al CSS</title>
+  <link rel="icon" href="https://desingdata.github.io/desingdata/img/DesingData_favicon-96x96.png" sizes="96x96" type="image/png">
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=DM+Mono:wght@300;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<div class="toast" id="toast"></div>
+
+<!-- NAV: hamburguesa en movil, links en desktop -->
+<nav class="nav print-hide" id="mainNav">
+  <div class="container">
+    <div class="nav-inner">
+      <a href="#" class="nav-logo">Responsive CSS</a>
+      <div class="nav-right">
+
+        <!-- Links desktop (ocultos en movil) -->
+        <ul class="nav-links">
+          <li><a href="#bases">Bases</a></li>
+          <li><a href="#mq">Media Queries</a></li>
+          <li><a href="#features">Features</a></li>
+          <li><a href="#container">Container</a></li>
+          <li><a href="#preferencias">Preferencias</a></li>
+          <li><a href="#print">Print</a></li>
+          <li><a href="#paginados">Paginados</a></li>
+        </ul>
+
+        <!-- Selector de temas -->
+        <div class="theme-panel-wrapper">
+          <button class="theme-btn" id="themeBtn" aria-label="Cambiar tema">
+            <span>&#127912;</span>
+            <span id="themeLbl">Dark</span>
+          </button>
+          <div class="theme-panel" id="themePanel">
+            <h4>Elige un tema</h4>
+            <div class="theme-options">
+              <button class="theme-option active" data-t="dark">  <span class="theme-dot dot-dark"></span>  Dark   </button>
+              <button class="theme-option"         data-t="light"> <span class="theme-dot dot-light"></span> Light  </button>
+              <button class="theme-option"         data-t="sunset"><span class="theme-dot dot-sunset"></span>Sunset </button>
+              <button class="theme-option"         data-t="ocean"> <span class="theme-dot dot-ocean"></span> Ocean  </button>
+              <button class="theme-option"         data-t="forest"><span class="theme-dot dot-forest"></span>Forest </button>
+              <button class="theme-option"         data-t="candy"> <span class="theme-dot dot-candy"></span> Candy  </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Hamburguesa (visible en movil) -->
+        <button class="hamburger" id="burgerBtn" aria-label="Menu" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+
+      </div>
+    </div>
+
+    <!-- Menu movil desplegable -->
+    <div class="nav-mobile-menu" id="mobileMenu" aria-hidden="true">
+      <ul class="nav-mobile-links">
+        <li><a href="#bases">01 &mdash; Bases del Responsive</a></li>
+        <li><a href="#mq">02 &mdash; Media Queries</a></li>
+        <li><a href="#features">03 &mdash; Media Features</a></li>
+        <li><a href="#container">04 &mdash; Container Queries</a></li>
+        <li><a href="#preferencias">05 &mdash; Preferencias de Usuario</a></li>
+        <li><a href="#print">06 &mdash; Medios Impresos</a></li>
+        <li><a href="#paginados">07 &mdash; Medios Paginados</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="container hero-content">
+    <div class="hero-tag"><span class="badge">Introducción al CSS </span></div>
+    <h1>Responsive<br/><span>Web Design</span></h1>
+    <p class="hero-desc">Menu hamburguesa, 6 temas de color y codigo completamente comentado en cada seccion.</p>
+    <div class="hero-pillars">
+      <span class="badge">Grids fluidos</span>
+      <span class="badge">Imagenes flexibles</span>
+      <span class="badge">Media Queries</span>
+      <span class="badge">Container Queries</span>
+      <span class="badge">User Preferences</span>
+      <span class="badge">6 Temas</span>
+    </div>
+  </div>
+</header>
+
+<!-- 1. BASES -->
+<section id="bases" class="section">
+  <div class="container">
+    <div class="section-header">
+      <p class="section-label">01 &mdash; Fundamentos</p>
+      <h2 class="section-title">Bases del Responsive Design</h2>
+      <p class="section-desc">Los tres pilares que permiten adaptar el diseno sin versiones separadas del sitio.</p>
+    </div>
+
+    <div class="viewport-demo print-hide">
+      <div class="device device-mobile">
+        <div class="device-content"><div class="device-block"></div><div class="device-block"></div><div class="device-block"></div></div>
+        <span class="device-label">Mobile</span>
+      </div>
+      <div class="device device-tablet">
+        <div class="device-content"><div class="device-block"></div><div class="device-block"></div><div class="device-block"></div><div class="device-block"></div></div>
+        <span class="device-label">Tablet</span>
+      </div>
+      <div class="device device-desktop">
+        <div class="device-content"><div class="device-block"></div><div class="device-block"></div><div class="device-block"></div><div class="device-block"></div><div class="device-block"></div><div class="device-block"></div></div>
+        <span class="device-label">Desktop</span>
+      </div>
+    </div>
+
+    <div class="fluid-grid">
+      <div class="card"><div class="card-icon">&#128690;</div><h3>Grids Fluidos</h3><p>Uso de <code>%</code>, <code>fr</code> y <code>auto-fill + minmax()</code> para columnas que se reorganizan solas sin media queries.</p></div>
+      <div class="card"><div class="card-icon">&#128444;</div><h3>Imagenes Flexibles</h3><p><code>max-width:100%; height:auto</code> garantiza que las imagenes escalen sin desbordarse ni distorsionarse.</p></div>
+      <div class="card"><div class="card-icon">&#128208;</div><h3>Meta Viewport</h3><p><code>width=device-width, initial-scale=1</code> activa el renderizado correcto en dispositivos moviles.</p></div>
+    </div>
+
+    <div class="fluid-text-demo">
+      <p class="section-label" style="margin-bottom:.5rem">Tipografia Fluida &mdash; clamp()</p>
+      <p class="demo-heading">Escala con el Viewport</p>
+      <p class="demo-sub">font-size: clamp(1.5rem, 5vw, 4rem) &mdash; sin media queries para tamanos</p>
+    </div>
+
+    <div class="layout-main" style="margin-top:1.5rem">
+      <aside class="sidebar">
+        <h4>Sidebar</h4>
+        <span class="nav-item">Grid fluido</span><span class="nav-item">Meta viewport</span><span class="nav-item">Imagenes flex</span><span class="nav-item">Mobile first</span><span class="nav-item" style="border-bottom:none">clamp()</span>
+        <p style="margin-top:1rem;font-size:.72rem;color:var(--muted)">En movil aparece arriba. En tablet/desktop, en columna lateral.</p>
+      </aside>
+      <div class="main-content">
+        <h4>Contenido principal</h4>
+        <p style="color:var(--muted);font-size:.8rem">Layout <strong>Mobile First</strong>: la regla base apila sidebar y contenido en una columna. Con <code>@media (min-width:640px)</code> se activan dos columnas.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 2. MEDIA QUERIES -->
+<section id="mq" class="section">
+  <div class="container">
+    <div class="section-header">
+      <p class="section-label">02 &mdash; Condiciones</p>
+      <h2 class="section-title">CSS Media Queries</h2>
+      <p class="section-desc">Condicionales que aplican estilos segun el tipo de medio y las caracteristicas del dispositivo.</p>
+    </div>
+    <div class="code-block"><pre><span class="cm">/* Estrategia Mobile First */</span>
+<span class="sel">.grid</span> {
+  <span class="pro">display</span>: <span class="val">grid</span>;
+  <span class="pro">grid-template-columns</span>: <span class="val">1fr</span>;  <span class="cm">/* 1 columna base (movil) */</span>
+}
+
+<span class="cm">/* Tablet >= 640px */</span>
+<span class="at">@media</span> (min-width: 640px) {
+  <span class="sel">.grid</span> { <span class="pro">grid-template-columns</span>: <span class="val">repeat(2, 1fr)</span>; }
+}
+
+<span class="cm">/* Desktop >= 1024px */</span>
+<span class="at">@media</span> (min-width: 1024px) {
+  <span class="sel">.grid</span> { <span class="pro">grid-template-columns</span>: <span class="val">repeat(3, 1fr)</span>; }
+}
+
+<span class="cm">/* Rango logico (MQ Level 4) */</span>
+<span class="at">@media</span> (640px &lt;= width &lt; 1024px) { <span class="cm">/* solo tablets */</span> }
+
+<span class="cm">/* Combinacion de condiciones */</span>
+<span class="at">@media</span> screen and (min-width: 768px) and (orientation: landscape) { }</pre></div>
+  </div>
+</section>
+
+<!-- 3. MEDIA FEATURES -->
+<section id="features" class="section">
+  <div class="container">
+    <div class="section-header">
+      <p class="section-label">03 &mdash; Caracteristicas</p>
+      <h2 class="section-title">CSS Media Features</h2>
+      <p class="section-desc">Condiciones evaluadas dentro de <code>@media</code>. Van mas alla del tamano e incluyen capacidades del dispositivo.</p>
+    </div>
+    <div class="features-grid">
+      <div class="feature-card"><div class="label">width / height</div><p>Dimensiones del viewport. <code>min-width</code> y <code>max-width</code> para rangos.</p></div>
+      <div class="feature-card"><div class="label">orientation</div><p><code>portrait</code> (alto &gt; ancho) o <code>landscape</code> (ancho &gt; alto).</p></div>
+      <div class="feature-card"><div class="label">resolution</div><p>Densidad en <code>dpi</code>, <code>dpcm</code> o <code>dppx</code>. Clave para imagenes retina.</p></div>
+      <div class="feature-card"><div class="label">hover</div><p><code>hover:hover</code> permite cursor. <code>hover:none</code> para touch.</p></div>
+      <div class="feature-card"><div class="label">pointer</div><p><code>fine</code> (raton), <code>coarse</code> (dedo), <code>none</code>. Tamanos de botones.</p></div>
+      <div class="feature-card"><div class="label">aspect-ratio</div><p>Proporcion ancho/alto. Util para layouts de video o disenos especiales.</p></div>
+      <div class="feature-card"><div class="label">color</div><p>Bits por canal de color. <code>0</code> para pantallas monocromo.</p></div>
+      <div class="feature-card"><div class="label">display-mode</div><p>Detecta si una PWA corre como <code>standalone</code>, <code>fullscreen</code>, etc.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- 4. CONTAINER QUERIES -->
+<section id="container" class="section">
+  <div class="container">
+    <div class="section-header">
+      <p class="section-label">04 &mdash; Componentes portables</p>
+      <h2 class="section-title">CSS Container Queries</h2>
+      <p class="section-desc">El componente se adapta segun el ancho del <em>contenedor padre</em>, no el viewport. Componentes verdaderamente reutilizables.</p>
+    </div>
+    <div class="code-block" style="margin-bottom:1.5rem"><pre><span class="cm">/* 1. Declarar el contenedor */</span>
+<span class="sel">.wrapper</span> {
+  <span class="pro">container-type</span>: <span class="val">inline-size</span>;
+  <span class="pro">container-name</span>: <span class="val">card-container</span>;
+}
+
+<span class="cm">/* 2. Query sobre el contenedor, no el viewport */</span>
+<span class="at">@container</span> card-container (min-width: 420px) {
+  <span class="sel">.cq-card</span> { <span class="pro">grid-template-columns</span>: <span class="val">80px 1fr</span>; }
+}</pre></div>
+    <div class="cq-demo-grid">
+      <div class="cq-wrapper"><div class="cq-card"><div class="cq-avatar">&#128105;&#8205;&#128187;</div><div class="cq-info"><h4>Ana Garcia</h4><p>Contenedor estrecho: avatar arriba.</p></div></div></div>
+      <div class="cq-wrapper"><div class="cq-card"><div class="cq-avatar">&#128104;&#8205;&#127912;</div><div class="cq-info"><h4>Carlos Ruiz</h4><p>Contenedor ancho (&ge;420px): avatar a la izquierda.</p></div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- 5. PREFERENCIAS -->
+<section id="preferencias" class="section">
+  <div class="container">
+    <div class="section-header">
+      <p class="section-label">05 &mdash; Accesibilidad del entorno</p>
+      <h2 class="section-title">Preferencias de Usuario</h2>
+      <p class="section-desc">CSS consulta y respeta las preferencias de accesibilidad configuradas en el sistema operativo.</p>
+    </div>
+    <div class="pref-demo">
+      <div class="pref-item"><div class="pref-icon">&#127763;</div><div><h4>prefers-color-scheme</h4><p>Activa tema oscuro/claro segun el SO. Los 6 temas de este proyecto van mas alla.</p></div></div>
+      <div class="pref-item"><div class="pref-icon">&#127917;</div><div><h4>prefers-reduced-motion</h4><p>Elimina animaciones para usuarios con sensibilidad al movimiento.</p></div></div>
+      <div class="pref-item"><div class="pref-icon">&#128262;</div><div><h4>prefers-contrast</h4><p>Aumenta contraste de bordes y colores para mejorar la legibilidad.</p></div></div>
+      <div class="pref-item"><div class="pref-icon">&#127776;</div><div><h4>forced-colors</h4><p>El SO fuerza paleta de alto contraste (Windows HCM). CSS debe respetarlo.</p></div></div>
+      <div class="pref-item"><div class="pref-icon">&#128241;</div><div><h4>prefers-reduced-data</h4><p>El usuario activa ahorro de datos. Sirve imagenes mas ligeras.</p></div></div>
+      <div class="pref-item"><div class="pref-icon">&#128254;</div><div><h4>prefers-reduced-transparency</h4><p>Reemplaza fondos semitransparentes por fondos opacos mas estables.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- 6. MEDIOS IMPRESOS -->
+<section id="print" class="section">
+  <div class="container">
+    <div class="section-header">
+      <p class="section-label">06 &mdash; Impresion</p>
+      <h2 class="section-title">Medios Impresos</h2>
+      <p class="section-desc"><code>@media print</code> aplica estilos cuando el usuario imprime o guarda como PDF.</p>
+    </div>
+    <div class="print-section">
+      <h4>Propiedades clave</h4>
+      <div class="print-rule"><span class="prop">page-break-inside: avoid</span><span class="desc">Evita que un bloque se divida entre dos paginas.</span></div>
+      <div class="print-rule"><span class="prop">break-before / break-after</span><span class="desc">Version moderna de page-break-before/after (estandar CSS3).</span></div>
+      <div class="print-rule"><span class="prop">display: none</span><span class="desc">Oculta nav, sidebars, botones en papel.</span></div>
+      <div class="print-rule"><span class="prop">color:black; background:white</span><span class="desc">Garantiza legibilidad y ahorra tinta.</span></div>
+      <div class="print-rule"><span class="prop">a[href]::after{content:attr(href)}</span><span class="desc">Muestra URLs de los enlaces en texto impreso.</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- 7. MEDIOS PAGINADOS -->
+<section id="paginados" class="section">
+  <div class="container">
+    <div class="section-header">
+      <p class="section-label">07 &mdash; Paginacion</p>
+      <h2 class="section-title">Medios Paginados &mdash; @page</h2>
+      <p class="section-desc">Controla tamano, orientacion y margenes de cada pagina impresa.</p>
+    </div>
+    <div class="paged-demo">
+      <div class="page-card"><div class="page-icon">&#128196;</div><h4>@page</h4><p>Define tamano (A4, letter), orientacion y margenes globales.</p></div>
+      <div class="page-card"><div class="page-icon">1&#65039;&#8419;</div><h4>@page :first</h4><p>Primera pagina. Portadas con margen superior mayor.</p></div>
+      <div class="page-card"><div class="page-icon">&#9664;</div><h4>@page :left</h4><p>Paginas pares (izquierda en libro). Margen exterior mayor.</p></div>
+      <div class="page-card"><div class="page-icon">&#9654;</div><h4>@page :right</h4><p>Paginas impares. Margen interior mayor para encuadernacion.</p></div>
+      <div class="page-card"><div class="page-icon">&#9744;</div><h4>@page :blank</h4><p>Paginas en blanco para alinear capitulos en doble cara.</p></div>
+    </div>
+    <div class="code-block" style="margin-top:1.5rem"><pre><span class="at">@media</span> print {
+  <span class="at">@page</span> { <span class="pro">size</span>:<span class="val">A4 portrait</span>; <span class="pro">margin</span>:<span class="val">2cm 1.5cm 2cm 2.5cm</span>; }
+  <span class="at">@page</span> :first { <span class="pro">margin-top</span>:<span class="val">4cm</span>; }
+  <span class="at">@page</span> :left  { <span class="pro">margin-left</span>:<span class="val">2.5cm</span>; <span class="pro">margin-right</span>:<span class="val">1.5cm</span>; }
+  <span class="at">@page</span> :right { <span class="pro">margin-left</span>:<span class="val">1.5cm</span>; <span class="pro">margin-right</span>:<span class="val">2.5cm</span>; }
+}</pre></div>
+  </div>
+</section>
+
+<footer class="print-hide">
+  <span class="footer-tag">
+        <a style="text-decoration: none;" href="https://desingdata.github.io/desingdata/" target="_blank">Desing Data</a> 2026
+    </span> 
+    <span class="footer-tag">
+         ·By <a style="text-decoration: none;" href="https://miguelmauricioriveralopez18686.github.io/mrlPortafolio/" target="_blank">
+      Miguel Mauricio Rivera López</a>.
+    </span>
+</footer>
+
+<script src="js/script.js"></script>
+</body>
+</html>
