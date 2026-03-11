@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="dark-cyan">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Interfaz de Usuario en CSS</title>
+  <link rel="icon" href="https://desingdata.github.io/desingdata/img/DesingData_favicon-96x96.png" sizes="96x96"
+    type="image/png">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=Space+Mono:wght@400;700&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+  <!-- ===================== HEADER ===================== -->
+  <header>
+    <p class="eyebrow">Introducción al · CSS</p>
+    <h1>Interfaz de <span>Usuario</span><br>en CSS</h1>
+    <p>Exploración completa de propiedades CSS para elementos nativos del navegador. Cambia el tema con el botón del
+      nav.</p>
+  </header>
+
+  <!-- ============================================================
+     NAV RESPONSIVO + SELECTOR DE TEMAS
+     .nav-bar: franja superior con logo y controles.
+     .nav-links: pills de ancla colapsables en movil.
+     .theme-panel: panel desplegable con 5 paletas.
+============================================================ -->
+  <nav class="toc" aria-label="Tabla de contenidos">
+    <div class="nav-bar">
+      <span class="nav-logo">CSS · UI</span>
+
+      <div class="nav-controls">
+        <!-- Selector de tema -->
+        <div class="theme-toggle-wrap">
+          <button class="theme-btn" id="themeToggleBtn" aria-expanded="false" aria-controls="themePanel">
+            <span class="dot"></span>
+            <span class="theme-label">Tema</span>
+            <svg width="10" height="10" viewBox="0 0 10 10" fill="none" aria-hidden="true">
+              <path d="M2 3.5L5 6.5L8 3.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+            </svg>
+          </button>
+          <div class="theme-panel" id="themePanel" role="listbox" aria-label="Seleccionar tema">
+            <span class="theme-panel-title">Seleccionar tema</span>
+            <button class="theme-option active" data-theme="dark-cyan" role="option"><span
+                class="swatch sw-dark-cyan"></span>Dark Cyan</button>
+            <button class="theme-option" data-theme="light-slate" role="option"><span
+                class="swatch sw-light-slate"></span>Light Slate</button>
+            <button class="theme-option" data-theme="dark-purple" role="option"><span
+                class="swatch sw-dark-purple"></span>Dark Purple</button>
+            <button class="theme-option" data-theme="dark-amber" role="option"><span
+                class="swatch sw-dark-amber"></span>Dark Amber</button>
+            <button class="theme-option" data-theme="light-rose" role="option"><span
+                class="swatch sw-light-rose"></span>Light Rose</button>
+          </div>
+        </div>
+
+        <!-- Boton hamburguesa (solo movil) -->
+        <button class="hamburger" id="hamburger" aria-label="Abrir menú" aria-expanded="false" aria-controls="navLinks">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+
+    <div class="nav-links" id="navLinks">
+      <a href="#interacciones">Interacciones</a>
+      <a href="#contornos">Contornos</a>
+      <a href="#cursor">Cursor</a>
+      <a href="#scrollbar">Scrollbar</a>
+      <a href="#smooth-scroll">Smooth Scroll</a>
+      <a href="#snap-scroll">Snap Scroll</a>
+      <a href="#tablas">Tablas</a>
+      <a href="#listas">Listas</a>
+      <a href="#contadores">Contadores</a>
+    </div>
+  </nav>
+
+  <main>
+
+    <!-- SECCIÓN 1: INTERACCIONES
+       :hover al pasar el raton, :focus-visible solo con teclado,
+       :active al mantener el clic, pointer-events: none sin interaccion. -->
+    <section id="interacciones">
+      <div class="section-header">
+        <span class="section-tag">01</span>
+        <h2>Interacciones CSS</h2>
+      </div>
+      <p class="description">
+        Pseudo-clases de interacción: <code>:hover</code> al pasar el ratón,
+        <code>:focus-visible</code> solo cuando el foco viene del teclado (accesibilidad),
+        <code>:active</code> mientras se mantiene el clic. <code>pointer-events: none</code>
+        desactiva todas las interacciones del ratón en un elemento.
+      </p>
+      <div class="interaction-grid">
+        <div class="int-box int-hover" tabindex="0">:hover<em>Pasa el ratón</em></div>
+        <button class="int-box int-focus" tabindex="0">:focus-visible<em>Presiona Tab</em></button>
+        <div class="int-box int-active" tabindex="0">:active<em>Mantén el clic</em></div>
+        <div class="int-box int-disabled">pointer-events: none<em>No interactuable</em></div>
+      </div>
+    </section>
+
+    <!-- SECCIÓN 2: CONTORNOS
+       outline: borde fuera del flujo, no ocupa espacio en el layout.
+       outline-offset: positivo aleja, negativo pone contorno interior. -->
+    <section id="contornos">
+      <div class="section-header">
+        <span class="section-tag">02</span>
+        <h2>Outline — Contornos</h2>
+      </div>
+      <p class="description">
+        <code>outline</code> dibuja un borde fuera del flujo (no desplaza elementos).
+        Fundamental para accesibilidad con teclado. <code>outline-offset</code> negativo
+        lo coloca <em>dentro</em> del elemento. Nunca uses <code>outline: none</code>
+        sin reemplazarlo por otro indicador visual.
+      </p>
+      <div class="outline-grid">
+        <div class="outline-box o-solid">solid · offset 4px<br><span
+            style="font-size:.62rem;color:var(--text-muted)">2px sólido</span></div>
+        <div class="outline-box o-dashed">dashed · offset 6px<br><span
+            style="font-size:.62rem;color:var(--text-muted)">2px punteado</span></div>
+        <div class="outline-box o-dotted">dotted · offset 2px<br><span
+            style="font-size:.62rem;color:var(--text-muted)">3px puntitos</span></div>
+        <div class="outline-box o-double">double · offset 3px<br><span
+            style="font-size:.62rem;color:var(--text-muted)">4px doble línea</span></div>
+        <div class="outline-box o-inset">offset: −4px<br><span style="font-size:.62rem;color:var(--text-muted)">contorno
+            interior</span></div>
+        <button class="outline-box o-focus" tabindex="0">:focus-visible<br><span
+            style="font-size:.62rem;color:var(--text-muted)">Tab para verlo</span></button>
+      </div>
+    </section>
+
+    <!-- SECCIÓN 3: CURSOR
+       cursor cambia el icono del puntero. Valores nativos del navegador
+       o URL a imagen personalizada con valor de respaldo. -->
+    <section id="cursor">
+      <div class="section-header">
+        <span class="section-tag">03</span>
+        <h2>Cursor del Ratón</h2>
+      </div>
+      <p class="description">
+        La propiedad <code>cursor</code> cambia el ícono del puntero al pasar sobre un elemento.
+        Acepta palabras clave nativas o una <code>url()</code> a imagen personalizada con
+        un valor de respaldo. Pasa el ratón sobre cada caja para verlo.
+      </p>
+      <div class="cursor-demo-grid">
+        <div class="cursor-box c-pointer">pointer<br><span style="font-size:.58rem">🖱 mano</span></div>
+        <div class="cursor-box c-crosshair">crosshair<br><span style="font-size:.58rem">✛ cruz</span></div>
+        <div class="cursor-box c-move">move<br><span style="font-size:.58rem">✥ mover</span></div>
+        <div class="cursor-box c-grab">grab<br><span style="font-size:.58rem">✊ agarrar</span></div>
+        <div class="cursor-box c-not-allowed">not-allowed<br><span style="font-size:.58rem">🚫 prohibido</span></div>
+        <div class="cursor-box c-zoom-in">zoom-in<br><span style="font-size:.58rem">🔍+ ampliar</span></div>
+        <div class="cursor-box c-zoom-out">zoom-out<br><span style="font-size:.58rem">🔍− reducir</span></div>
+        <div class="cursor-box c-text">text<br><span style="font-size:.58rem">𝐈 texto</span></div>
+        <div class="cursor-box c-wait">wait<br><span style="font-size:.58rem">⌛ espera</span></div>
+        <div class="cursor-box c-help">help<br><span style="font-size:.58rem">❓ ayuda</span></div>
+        <div class="cursor-box c-col-resize">col-resize<br><span style="font-size:.58rem">↔ resize</span></div>
+        <div class="cursor-box c-default">default<br><span style="font-size:.58rem">↖ default</span></div>
+      </div>
+    </section>
+
+    <!-- SECCIÓN 4: SCROLLBAR
+       ::-webkit-scrollbar, ::-webkit-scrollbar-track, ::-webkit-scrollbar-thumb
+       para Chrome/Edge/Safari. scrollbar-width y scrollbar-color para Firefox/W3C. -->
+    <section id="scrollbar">
+      <div class="section-header">
+        <span class="section-tag">04</span>
+        <h2>Barras de Desplazamiento</h2>
+      </div>
+      <p class="description">
+        <code>::-webkit-scrollbar</code> controla cada parte de la barra en Webkit.
+        <code>scrollbar-width</code> y <code>scrollbar-color</code> son el estándar W3C
+        compatible con Firefox y Chromium moderno. El color de la scrollbar cambia con el tema activo.
+      </p>
+      <div class="card">
+        <div class="scroll-inner">
+          <div class="code-block" style="background:none;border:none;padding:0">
+            <span class="kw">/* Pseudo-elementos Webkit */</span><br>
+            ::-webkit-scrollbar { width: <span class="val">10px</span>; }<br>
+            ::-webkit-scrollbar-track { background: <span class="val">var(--surface)</span>; }<br>
+            ::-webkit-scrollbar-thumb {<br>
+            &nbsp;&nbsp;background: <span class="val">var(--scrollbar-thumb)</span>;<br>
+            &nbsp;&nbsp;border-radius: <span class="val">99px</span>;<br>
+            &nbsp;&nbsp;border: <span class="val">2px solid</span> var(--surface2);<br>
+            }<br><br>
+            <span class="kw">/* Estandar W3C (Firefox + Chromium) */</span><br>
+            scrollbar-width: <span class="val">thin</span>;<br>
+            scrollbar-color: <span class="val">var(--accent)</span> <span class="val">var(--surface)</span>;<br><br>
+            Desplazate hacia abajo para ver la scrollbar personalizada...<br><br>
+            Lorem ipsum dolor sit amet consectetur adipiscing elit.<br>
+            Sed do eiusmod tempor incididunt ut labore et dolore.<br>
+            Ut enim ad minim veniam quis nostrud exercitation.<br>
+            ¡La scrollbar usa el gradiente del tema activo! 🎨<br>
+            Cambia el tema arriba y vuelve aqui para comprobarlo.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECCIÓN 5: SMOOTH SCROLL
+       scroll-behavior: smooth anima la navegacion por anclas.
+       scroll-margin-top compensa la altura del nav sticky. -->
+    <section id="smooth-scroll">
+      <div class="section-header">
+        <span class="section-tag">05</span>
+        <h2>Scroll Suave</h2>
+      </div>
+      <p class="description">
+        <code>scroll-behavior: smooth</code> en <code>html</code> anima la navegación por anclas
+        y las llamadas a <code>scrollTo()</code>. <code>scroll-margin-top</code> en cada
+        <code>section</code> evita que el nav sticky tape el título al saltar. Haz clic en
+        cualquier enlace del nav para verlo en acción.
+      </p>
+      <div class="code-block">
+        <span class="kw">/* Scroll animado global */</span><br>
+        html { scroll-behavior: <span class="val">smooth</span>; }<br><br>
+        <span class="kw">/* Compensar nav sticky al saltar por ancla */</span><br>
+        section { scroll-margin-top: <span class="val">72px</span>; }<br><br>
+        <span class="kw">/* En movil el nav es mas alto */</span><br>
+        @media (max-width: 640px) {<br>
+        &nbsp;&nbsp;section { scroll-margin-top: <span class="val">120px</span>; }<br>
+        }
+      </div>
+    </section>
+
+    <!-- SECCIÓN 6: CSS SNAP SCROLL
+       scroll-snap-type: x mandatory en el contenedor.
+       scroll-snap-align: start en cada hijo.
+       mandatory = siempre encaja. proximity = solo si esta cerca. -->
+    <section id="snap-scroll">
+      <div class="section-header">
+        <span class="section-tag">06</span>
+        <h2>CSS Snap Scroll</h2>
+      </div>
+      <p class="description">
+        <code>scroll-snap-type: x mandatory</code> en el contenedor y
+        <code>scroll-snap-align: start</code> en cada hijo hacen que el scroll
+        "encaje" automáticamente en cada tarjeta. Carrusel CSS puro sin JavaScript.
+        Desliza el contenedor de abajo:
+      </p>
+      <div class="snap-container">
+        <div class="snap-item"><span>🎯</span>scroll-snap-type:<br>x mandatory</div>
+        <div class="snap-item"><span>📌</span>scroll-snap-align:<br>start</div>
+        <div class="snap-item"><span>🔒</span>mandatory: siempre<br>encaja en un hijo</div>
+        <div class="snap-item"><span>📐</span>proximity: encaja<br>si estás cerca</div>
+        <div class="snap-item"><span>↔</span>También en<br>eje Y vertical</div>
+        <div class="snap-item"><span>🎠</span>Carrusel CSS<br>puro · sin JS</div>
+      </div>
+    </section>
+
+    <!-- SECCIÓN 7: TABLAS CSS
+       border-collapse: collapse une celdas adyacentes.
+       border-spacing: espacio entre celdas (modo separate).
+       caption-side: top | bottom posicion del caption.
+       vertical-align: alineacion del contenido en la celda. -->
+    <section id="tablas">
+      <div class="section-header">
+        <span class="section-tag">07</span>
+        <h2>Tablas CSS</h2>
+      </div>
+      <p class="description">
+        Propiedades de tabla: <code>border-collapse: collapse</code> une los bordes adyacentes;
+        <code>border-spacing</code> los separa (requiere <code>separate</code>);
+        <code>caption-side</code> posiciona el <code>&lt;caption&gt;</code>;
+        <code>vertical-align</code> alinea el contenido en cada celda.
+      </p>
+      <div class="table-wrapper">
+        <table>
+          <caption>Propiedades CSS — Interfaz de Usuario</caption>
+          <thead>
+            <tr>
+              <th>Propiedad</th>
+              <th>Categoría</th>
+              <th>Soporte</th>
+              <th>Descripción</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code style="font-family:var(--font-mono);color:var(--accent);font-size:.76rem;">cursor</code></td>
+              <td>Interacción</td>
+              <td><span class="badge badge-green">Universal</span></td>
+              <td>Cambia el ícono del puntero del ratón</td>
+            </tr>
+            <tr>
+              <td><code style="font-family:var(--font-mono);color:var(--accent);font-size:.76rem;">outline</code></td>
+              <td>Interacción</td>
+              <td><span class="badge badge-green">Universal</span></td>
+              <td>Borde fuera del flujo, clave para accesibilidad</td>
+            </tr>
+            <tr>
+              <td><code
+                  style="font-family:var(--font-mono);color:var(--accent);font-size:.76rem;">::-webkit-scrollbar</code>
+              </td>
+              <td>Scrollbar</td>
+              <td><span class="badge badge-yellow">Webkit</span></td>
+              <td>Pseudo-elemento para estilizar scrollbars</td>
+            </tr>
+            <tr>
+              <td><code
+                  style="font-family:var(--font-mono);color:var(--accent);font-size:.76rem;">scrollbar-color</code></td>
+              <td>Scrollbar</td>
+              <td><span class="badge badge-green">Estándar</span></td>
+              <td>Color del thumb y track (Firefox y Chromium)</td>
+            </tr>
+            <tr>
+              <td><code
+                  style="font-family:var(--font-mono);color:var(--accent);font-size:.76rem;">scroll-behavior</code></td>
+              <td>Scroll</td>
+              <td><span class="badge badge-green">Universal</span></td>
+              <td>Activa el scroll animado en anclas</td>
+            </tr>
+            <tr>
+              <td><code
+                  style="font-family:var(--font-mono);color:var(--accent);font-size:.76rem;">scroll-snap-type</code>
+              </td>
+              <td>Snap Scroll</td>
+              <td><span class="badge badge-green">Universal</span></td>
+              <td>Define el eje y modo de encaje del scroll</td>
+            </tr>
+            <tr>
+              <td><code style="font-family:var(--font-mono);color:var(--accent);font-size:.76rem;">list-style</code>
+              </td>
+              <td>Listas</td>
+              <td><span class="badge badge-green">Universal</span></td>
+              <td>Shorthand: tipo, imagen y posición de viñeta</td>
+            </tr>
+            <tr>
+              <td><code style="font-family:var(--font-mono);color:var(--accent);font-size:.76rem;">counter-reset</code>
+              </td>
+              <td>Contadores</td>
+              <td><span class="badge badge-green">Universal</span></td>
+              <td>Crea e inicializa un contador CSS</td>
+            </tr>
+            <tr>
+              <td><code
+                  style="font-family:var(--font-mono);color:var(--accent);font-size:.76rem;">border-collapse</code></td>
+              <td>Tablas</td>
+              <td><span class="badge badge-green">Universal</span></td>
+              <td>Une o separa los bordes de celdas</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- SECCIÓN 8: LISTAS CSS
+       list-style-type: disc | circle | square | none | decimal
+       list-style-image: url() reemplaza la vineta con imagen.
+       list-style-position: inside | outside.
+       list-style: shorthand de las tres anteriores. -->
+    <section id="listas">
+      <div class="section-header">
+        <span class="section-tag">08</span>
+        <h2>Listas CSS</h2>
+      </div>
+      <p class="description">
+        <code>list-style-type</code> define el marcador; <code>list-style-image</code> lo reemplaza
+        con una imagen; <code>list-style-position: inside</code> incluye el marcador dentro del flujo.
+        Con <code>list-style: none</code> y <code>::before</code> obtienes control total del marcador.
+      </p>
+      <div class="lists-grid">
+        <div class="list-card">
+          <h4>disc (defecto)</h4>
+          <ul class="list-disc">
+            <li>list-style-type: disc</li>
+            <li>Viñeta circular rellena</li>
+            <li>Default en &lt;ul&gt;</li>
+          </ul>
+        </div>
+        <div class="list-card">
+          <h4>circle</h4>
+          <ul class="list-circle">
+            <li>list-style-type: circle</li>
+            <li>Círculo vacío</li>
+            <li>Útil en sublistas</li>
+          </ul>
+        </div>
+        <div class="list-card">
+          <h4>square</h4>
+          <ul class="list-square">
+            <li>list-style-type: square</li>
+            <li>Cuadrado relleno</li>
+            <li>Estilo más sólido</li>
+          </ul>
+        </div>
+        <div class="list-card">
+          <h4>custom ::before</h4>
+          <ul class="list-custom">
+            <li>list-style: none</li>
+            <li>content: "→ " en ::before</li>
+            <li>Control total</li>
+          </ul>
+        </div>
+        <div class="list-card">
+          <h4>decimal (ol)</h4>
+          <ol class="list-decimal">
+            <li>list-style-type: decimal</li>
+            <li>Numeración automática</li>
+            <li>Usada en &lt;ol&gt;</li>
+          </ol>
+        </div>
+        <div class="list-card">
+          <h4>position: inside</h4>
+          <ul class="list-inside">
+            <li>list-style-position: inside</li>
+            <li>Viñeta dentro del bloque</li>
+            <li>Texto fluye bajo viñeta</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECCIÓN 9: CONTADORES CSS
+       counter-reset: nombre crea el contador en valor 0.
+       counter-increment: nombre suma 1 en cada elemento.
+       counter(nombre, tipo) muestra el valor en content.
+       counters(nombre, sep) genera numeracion jerarquica automatica. -->
+    <section id="contadores">
+      <div class="section-header">
+        <span class="section-tag">09</span>
+        <h2>Contadores CSS</h2>
+      </div>
+      <p class="description">
+        Variables numéricas gestionadas por el motor CSS.
+        <code>counter-reset</code> las crea; <code>counter-increment</code> las incrementa;
+        <code>counter()</code> las muestra en <code>content</code>. <code>counters()</code>
+        genera numeración jerárquica automática (1 → 1.1 → 1.1.1) sin HTML extra.
+      </p>
+      <div class="two-col-grid">
+        <div class="card">
+          <h3>counter() — decimal-leading-zero</h3>
+          <ul class="counter-list">
+            <li>counter-reset en &lt;ul&gt;</li>
+            <li>counter-increment en &lt;li&gt;</li>
+            <li>counter(steps, decimal-leading-zero)</li>
+            <li>Genera: 01, 02, 03...</li>
+            <li>Sin HTML extra necesario</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3 style="color:var(--accent3)">counters() — Anidados</h3>
+          <ol class="nested-counter">
+            <li>Tema principal
+              <ol>
+                <li>Subtema uno</li>
+                <li>Subtema dos</li>
+              </ol>
+            </li>
+            <li>Otro tema
+              <ol>
+                <li>Subtema A</li>
+                <li>Subtema B</li>
+              </ol>
+            </li>
+            <li>Tercer tema</li>
+          </ol>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <span class="footer-tag">
+      <a style="text-decoration: none;" href="https://desingdata.github.io/desingdata/" target="_blank">Desing Data</a>
+      2026
+    </span>
+    <span class="footer-tag">
+      ·By <a style="text-decoration: none;" href="https://miguelmauricioriveralopez18686.github.io/mrlPortafolio/"
+        target="_blank">
+        Miguel Mauricio Rivera López</a>.
+    </span>
+  </footer>
+
+  <!-- ============================================================
+     JAVASCRIPT — Selector de tema + Nav hamburguesa + Link activo
+     Vanilla JS sin dependencias. La logica de temas solo cambia
+     data-theme en <html>; las CSS custom properties hacen el resto.
+============================================================ -->
+  <script src="js/script.js"></script>
+
+</body>
+
+</html>
