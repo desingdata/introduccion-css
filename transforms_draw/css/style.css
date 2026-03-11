@@ -1,0 +1,902 @@
+/* =============================================
+       VARIABLES DE TEMA
+       Cada [data-theme] redefine las mismas custom
+       properties — cambiar un atributo en <html>
+       actualiza toda la paleta al instante.
+       ============================================= */
+[data-theme="dark-purple"] {
+    --bg: #0f0f1a;
+    --surface: #16162a;
+    --card: #1e1e35;
+    --border: #2d2d50;
+    --border2: #3b3b6b;
+    --text: #e0e0f0;
+    --muted: #94a3b8;
+    --dim: #475569;
+    --a1: #a78bfa;
+    --a2: #60a5fa;
+    --a3: #34d399;
+    --a4: #fbbf24;
+    --a5: #f472b6;
+    --nav-bg: #13132280;
+    --code-bg: #0d0d1f;
+    --hero: linear-gradient(90deg, #a78bfa, #60a5fa);
+}
+
+[data-theme="ocean"] {
+    --bg: #04111f;
+    --surface: #071e33;
+    --card: #0a2948;
+    --border: #0e3d6b;
+    --border2: #145294;
+    --text: #dff0ff;
+    --muted: #7ab8e0;
+    --dim: #3a6c94;
+    --a1: #38bdf8;
+    --a2: #06b6d4;
+    --a3: #2dd4bf;
+    --a4: #facc15;
+    --a5: #f0abfc;
+    --nav-bg: #04111fcc;
+    --code-bg: #020e1a;
+    --hero: linear-gradient(90deg, #38bdf8, #2dd4bf);
+}
+
+[data-theme="forest"] {
+    --bg: #071510;
+    --surface: #0d221a;
+    --card: #132e23;
+    --border: #1d4535;
+    --border2: #265c47;
+    --text: #d8f5e8;
+    --muted: #6fb891;
+    --dim: #3a7055;
+    --a1: #4ade80;
+    --a2: #86efac;
+    --a3: #a3e635;
+    --a4: #fde68a;
+    --a5: #f9a8d4;
+    --nav-bg: #071510cc;
+    --code-bg: #030f0a;
+    --hero: linear-gradient(90deg, #4ade80, #a3e635);
+}
+
+[data-theme="sunset"] {
+    --bg: #1a0a00;
+    --surface: #2a1100;
+    --card: #3a1800;
+    --border: #5a2800;
+    --border2: #7c3700;
+    --text: #fff3e0;
+    --muted: #d4956a;
+    --dim: #7a4a2a;
+    --a1: #fb923c;
+    --a2: #fbbf24;
+    --a3: #f43f5e;
+    --a4: #e879f9;
+    --a5: #67e8f9;
+    --nav-bg: #1a0a00cc;
+    --code-bg: #120700;
+    --hero: linear-gradient(90deg, #fb923c, #f43f5e);
+}
+
+[data-theme="light"] {
+    --bg: #f4f6fb;
+    --surface: #ffffff;
+    --card: #f0f2fa;
+    --border: #dde2f0;
+    --border2: #c8cfe8;
+    --text: #1e2240;
+    --muted: #5a6490;
+    --dim: #8890b0;
+    --a1: #6d28d9;
+    --a2: #2563eb;
+    --a3: #059669;
+    --a4: #d97706;
+    --a5: #db2777;
+    --nav-bg: #ffffffcc;
+    --code-bg: #e8ecf7;
+    --hero: linear-gradient(90deg, #6d28d9, #2563eb);
+}
+
+/* =============================================
+       RESET & BASE
+       ============================================= */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0
+}
+
+html {
+    scroll-behavior: smooth
+}
+
+body {
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.65;
+    transition: background .35s, color .35s
+}
+
+code {
+    color: var(--a1);
+    background: var(--border);
+    padding: .1em .35em;
+    border-radius: 4px;
+    font-size: .88em
+}
+
+/* =============================================
+       NAVBAR — fija, glassmorphism
+       backdrop-filter crea el efecto de vidrio esmerilado.
+       ============================================= */
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    height: 60px;
+    padding: 0 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    background: var(--nav-bg);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--border);
+    transition: background .35s, border-color .35s;
+}
+
+.nav-logo {
+    font-weight: 700;
+    font-size: 1rem;
+    white-space: nowrap;
+    flex-shrink: 0;
+    background: var(--hero);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent
+}
+
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: .2rem;
+    list-style: none
+}
+
+.nav-links a {
+    display: block;
+    padding: .4rem .7rem;
+    border-radius: 8px;
+    font-size: .83rem;
+    color: var(--muted);
+    text-decoration: none;
+    transition: background .2s, color .2s
+}
+
+.nav-links a:hover {
+    background: var(--border);
+    color: var(--text)
+}
+
+.nav-controls {
+    display: flex;
+    align-items: center;
+    gap: .6rem;
+    flex-shrink: 0
+}
+
+/* ── Selector de tema ──
+       Botones circulares que invocan applyTheme() en JS. */
+.theme-picker {
+    display: flex;
+    align-items: center;
+    gap: .4rem
+}
+
+.theme-btn {
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    border: 2px solid transparent;
+    cursor: pointer;
+    padding: 0;
+    outline: none;
+    transition: transform .2s, border-color .2s
+}
+
+.theme-btn:hover {
+    transform: scale(1.25)
+}
+
+.theme-btn.active {
+    border-color: var(--text);
+    transform: scale(1.15)
+}
+
+.theme-btn[data-theme="dark-purple"] {
+    background: linear-gradient(135deg, #a78bfa, #60a5fa)
+}
+
+.theme-btn[data-theme="ocean"] {
+    background: linear-gradient(135deg, #38bdf8, #2dd4bf)
+}
+
+.theme-btn[data-theme="forest"] {
+    background: linear-gradient(135deg, #4ade80, #a3e635)
+}
+
+.theme-btn[data-theme="sunset"] {
+    background: linear-gradient(135deg, #fb923c, #f43f5e)
+}
+
+.theme-btn[data-theme="light"] {
+    background: linear-gradient(135deg, #e0e7ff, #c4b5fd)
+}
+
+/* ── Botón hamburguesa ──
+       Tres <span> se transforman en X con CSS cuando
+       el padre tiene la clase .open. */
+.hamburger {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+    width: 36px;
+    height: 36px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 4px;
+    border-radius: 8px;
+    transition: background .2s
+}
+
+.hamburger:hover {
+    background: var(--border)
+}
+
+.hamburger span {
+    display: block;
+    height: 2px;
+    width: 100%;
+    background: var(--text);
+    border-radius: 2px;
+    transition: transform .3s, opacity .3s, width .3s;
+    transform-origin: center
+}
+
+.hamburger.open span:nth-child(1) {
+    transform: translateY(7px) rotate(45deg)
+}
+
+.hamburger.open span:nth-child(2) {
+    opacity: 0;
+    width: 0
+}
+
+.hamburger.open span:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg)
+}
+
+/* =============================================
+       MENÚ MÓVIL — drawer deslizante
+       Usa transform + opacity para animar la entrada.
+       JS agrega/quita la clase .open.
+       ============================================= */
+.mobile-menu {
+    display: none;
+    position: fixed;
+    top: 60px;
+    left: 0;
+    right: 0;
+    z-index: 999;
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    padding: 1rem 1.5rem 1.5rem;
+    transform: translateY(-8px);
+    opacity: 0;
+    transition: transform .3s ease, opacity .3s ease, background .35s;
+}
+
+.mobile-menu.open {
+    transform: translateY(0);
+    opacity: 1
+}
+
+.mobile-menu ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: .25rem;
+    margin-bottom: 1rem
+}
+
+.mobile-menu a {
+    display: block;
+    padding: .65rem 1rem;
+    border-radius: 10px;
+    color: var(--muted);
+    text-decoration: none;
+    font-size: .95rem;
+    transition: background .2s, color .2s
+}
+
+.mobile-menu a:hover {
+    background: var(--border);
+    color: var(--text)
+}
+
+.mobile-theme-row {
+    display: flex;
+    align-items: center;
+    gap: .75rem;
+    padding-top: .75rem;
+    border-top: 1px solid var(--border)
+}
+
+.mobile-theme-label {
+    font-size: .8rem;
+    color: var(--dim);
+    margin-right: auto
+}
+
+/* =============================================
+       LAYOUT PRINCIPAL
+       ============================================= */
+.page {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 5rem 1.5rem 3rem
+}
+
+h1 {
+    text-align: center;
+    font-size: clamp(1.6rem, 5vw, 2.5rem);
+    margin-bottom: .4rem;
+    background: var(--hero);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent
+}
+
+.subtitle {
+    text-align: center;
+    color: var(--muted);
+    margin-bottom: 3rem;
+    font-size: clamp(.83rem, 2vw, .97rem)
+}
+
+h2 {
+    font-size: clamp(1rem, 3vw, 1.3rem);
+    color: var(--a1);
+    margin-bottom: 1.2rem;
+    border-left: 4px solid var(--a1);
+    padding-left: .8rem
+}
+
+.section {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: clamp(1.1rem, 4vw, 2rem);
+    margin-bottom: 2.5rem;
+    transition: background .35s, border-color .35s
+}
+
+.section>p {
+    color: var(--muted);
+    margin-bottom: 1.4rem;
+    font-size: .9rem
+}
+
+.demo-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.1rem;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1.4rem
+}
+
+.card {
+    background: var(--card);
+    border: 1px solid var(--border2);
+    border-radius: 12px;
+    padding: 1rem 1.2rem;
+    text-align: center;
+    transition: background .35s, border-color .35s
+}
+
+.label {
+    font-size: .7rem;
+    color: var(--dim);
+    margin-top: .6rem;
+    text-transform: uppercase;
+    letter-spacing: .07em;
+    line-height: 1.4
+}
+
+/* ── Caja de demo ── */
+.box {
+    width: 70px;
+    height: 70px;
+    background: linear-gradient(135deg, var(--a1), var(--a2));
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    color: #fff;
+    font-size: .83rem;
+    transition: transform .4s ease, box-shadow .4s ease;
+    cursor: default
+}
+
+.box:hover {
+    box-shadow: 0 0 22px color-mix(in srgb, var(--a1) 55%, transparent)
+}
+
+/* =============================================
+       TRANSFORMACIONES 2D
+       ============================================= */
+/* translate(x,y): desplaza sin modificar el flujo */
+.translate:hover {
+    transform: translate(18px, -18px)
+}
+
+/* rotate(deg): gira sobre el eje Z */
+.rotate:hover {
+    transform: rotate(45deg)
+}
+
+/* scale(n): agranda o reduce visualmente */
+.scale:hover {
+    transform: scale(1.4)
+}
+
+/* skew(deg): inclina/sesga el elemento */
+.skew:hover {
+    transform: skewX(20deg)
+}
+
+/* Combinada: múltiples funciones en cadena */
+.combined:hover {
+    transform: translate(8px, -8px) rotate(30deg) scale(1.15)
+}
+
+/* =============================================
+       TRANSFORMACIONES 3D
+       perspective en padre + preserve-3d en hijo
+       activan el espacio tridimensional.
+       ============================================= */
+.scene-3d {
+    perspective: 500px;
+    width: 70px;
+    height: 70px;
+    cursor: pointer
+}
+
+.flip-y {
+    transform-style: preserve-3d;
+    transition: transform .6s ease
+}
+
+.scene-3d:hover .flip-y {
+    transform: rotateY(180deg)
+}
+
+.flip-x {
+    transform-style: preserve-3d;
+    transition: transform .6s ease
+}
+
+.scene-3d:hover .flip-x {
+    transform: rotateX(180deg)
+}
+
+.flip-z {
+    transform-style: preserve-3d;
+    transition: transform .6s ease
+}
+
+.scene-3d:hover .flip-z {
+    transform: rotateZ(180deg)
+}
+
+.move3d {
+    transition: transform .4s ease
+}
+
+.scene-3d:hover .move3d {
+    transform: translate3d(8px, -8px, 40px) rotateY(25deg)
+}
+
+/* =============================================
+       FORMAS CSS
+       ============================================= */
+/* Círculo: border-radius:50% en un cuadrado */
+.circle {
+    width: 70px;
+    height: 70px;
+    background: linear-gradient(135deg, var(--a5), var(--a1));
+    border-radius: 50%
+}
+
+/* Triángulo: truco de bordes en elemento 0×0 */
+.triangle {
+    width: 0;
+    height: 0;
+    border-left: 34px solid transparent;
+    border-right: 34px solid transparent;
+    border-bottom: 60px solid var(--a2)
+}
+
+/* Triángulo invertido: border-top en lugar de bottom */
+.triangle-down {
+    width: 0;
+    height: 0;
+    border-left: 34px solid transparent;
+    border-right: 34px solid transparent;
+    border-top: 60px solid var(--a5)
+}
+
+/* Rombo: cuadrado rotado 45° */
+.diamond {
+    width: 52px;
+    height: 52px;
+    background: linear-gradient(135deg, var(--a3), var(--a2));
+    transform: rotate(45deg);
+    border-radius: 4px
+}
+
+/* Estrella: dos triángulos con ::before */
+.star {
+    position: relative;
+    width: 0;
+    height: 0;
+    border-left: 42px solid transparent;
+    border-right: 42px solid transparent;
+    border-bottom: 60px solid var(--a4)
+}
+
+.star::before {
+    content: '';
+    position: absolute;
+    top: 18px;
+    left: -42px;
+    width: 0;
+    height: 0;
+    border-left: 42px solid transparent;
+    border-right: 42px solid transparent;
+    border-top: 60px solid var(--a4)
+}
+
+/* Corazón: rectángulo + dos semicírculos */
+.heart {
+    position: relative;
+    width: 62px;
+    height: 52px;
+    transform: rotate(-45deg);
+    background: var(--a5)
+}
+
+.heart::before,
+.heart::after {
+    content: '';
+    position: absolute;
+    width: 62px;
+    height: 62px;
+    border-radius: 50%;
+    background: var(--a5)
+}
+
+.heart::before {
+    top: -30px;
+    left: 0
+}
+
+.heart::after {
+    top: 0;
+    left: 30px
+}
+
+/* Nube: rectángulo + cúpulas con pseudo-elementos */
+.cloud {
+    position: relative;
+    width: 95px;
+    height: 34px;
+    background: var(--muted);
+    border-radius: 17px
+}
+
+.cloud::before {
+    content: '';
+    position: absolute;
+    width: 42px;
+    height: 42px;
+    background: var(--muted);
+    border-radius: 50%;
+    top: -20px;
+    left: 11px
+}
+
+.cloud::after {
+    content: '';
+    position: absolute;
+    width: 58px;
+    height: 58px;
+    background: var(--muted);
+    border-radius: 50%;
+    top: -34px;
+    left: 27px
+}
+
+/* Hexágono: clip-path con coordenadas % */
+.hexagon {
+    width: 78px;
+    height: 70px;
+    background: linear-gradient(135deg, var(--a1), var(--a3));
+    clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%)
+}
+
+/* Flecha: clip-path personalizada */
+.arrow-shape {
+    width: 88px;
+    height: 62px;
+    background: linear-gradient(90deg, var(--a5), var(--a4));
+    clip-path: polygon(0 20%, 68% 20%, 68% 0%, 100% 50%, 68% 100%, 68% 80%, 0 80%)
+}
+
+/* =============================================
+       PAISAJE CSS
+       Composición que usa posicionamiento absoluto,
+       formas y variables de tema para ser reactiva.
+       ============================================= */
+.scene {
+    position: relative;
+    width: 100%;
+    max-width: 560px;
+    height: clamp(190px, 38vw, 275px);
+    background: linear-gradient(180deg, color-mix(in srgb, var(--a2) 55%, #000) 0%, color-mix(in srgb, var(--a2) 18%, #fff) 55%, color-mix(in srgb, var(--a3) 35%, #000) 55%, color-mix(in srgb, var(--a3) 65%, #000) 100%);
+    border-radius: 14px;
+    overflow: hidden;
+    margin: 0 auto;
+    transition: background .35s
+}
+
+.sun {
+    position: absolute;
+    top: 16px;
+    right: 42px;
+    width: 52px;
+    height: 52px;
+    background: var(--a4);
+    border-radius: 50%;
+    box-shadow: 0 0 26px 10px color-mix(in srgb, var(--a4) 50%, transparent)
+}
+
+.mountain {
+    position: absolute;
+    bottom: 0;
+    left: 46px;
+    width: 0;
+    height: 0;
+    border-left: 90px solid transparent;
+    border-right: 90px solid transparent;
+    border-bottom: 145px solid color-mix(in srgb, var(--a3) 22%, #000)
+}
+
+.mountain::after {
+    content: '';
+    position: absolute;
+    top: -145px;
+    left: -26px;
+    width: 0;
+    height: 0;
+    border-left: 26px solid transparent;
+    border-right: 26px solid transparent;
+    border-bottom: 42px solid color-mix(in srgb, var(--text) 80%, transparent)
+}
+
+.mountain2 {
+    position: absolute;
+    bottom: 0;
+    left: 165px;
+    width: 0;
+    height: 0;
+    border-left: 115px solid transparent;
+    border-right: 115px solid transparent;
+    border-bottom: 185px solid color-mix(in srgb, var(--a3) 32%, #000)
+}
+
+.cloud-scene {
+    position: absolute;
+    top: 34px;
+    left: 65px;
+    scale: .78
+}
+
+.house-body {
+    position: absolute;
+    bottom: 0;
+    right: 68px;
+    width: 62px;
+    height: 54px;
+    background: color-mix(in srgb, var(--a4) 38%, #4a2000)
+}
+
+.house-roof {
+    position: absolute;
+    bottom: 52px;
+    right: 57px;
+    width: 0;
+    height: 0;
+    border-left: 42px solid transparent;
+    border-right: 42px solid transparent;
+    border-bottom: 36px solid color-mix(in srgb, var(--a5) 45%, #500)
+}
+
+.house-window {
+    position: absolute;
+    bottom: 24px;
+    right: 84px;
+    width: 14px;
+    height: 12px;
+    background: var(--a2);
+    border: 2px solid var(--dim)
+}
+
+.house-door {
+    position: absolute;
+    bottom: 0;
+    right: 96px;
+    width: 15px;
+    height: 24px;
+    background: var(--dim);
+    border-radius: 7px 7px 0 0
+}
+
+/* =============================================
+       BLOQUE DE CÓDIGO
+       ============================================= */
+.code-block {
+    background: var(--code-bg);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: .85rem 1.1rem;
+    font-family: 'Courier New', monospace;
+    font-size: clamp(.7rem, 1.7vw, .81rem);
+    color: var(--muted);
+    overflow-x: auto;
+    margin-top: 1rem;
+    white-space: pre;
+    line-height: 1.7;
+    transition: background .35s, border-color .35s
+}
+
+.kw {
+    color: var(--a1)
+}
+
+.val {
+    color: var(--a2)
+}
+
+.cmt {
+    color: var(--dim);
+    font-style: italic
+}
+
+.prop {
+    color: var(--a3)
+}
+
+/* =============================================
+       RESUMEN
+       ============================================= */
+.summary-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(185px, 1fr));
+    gap: 1rem
+}
+
+.summary-card {
+    background: var(--card);
+    border: 1px solid var(--border2);
+    border-radius: 12px;
+    padding: 1rem 1.1rem;
+    transition: background .35s, border-color .35s
+}
+
+.summary-card strong {
+    color: var(--a1)
+}
+
+.summary-card p {
+    color: var(--muted);
+    font-size: .82rem;
+    margin-top: .35rem
+}
+
+/* =============================================
+       RESPONSIVE — breakpoints
+       ============================================= */
+/* ≤768px: ocultar nav-links, mostrar hamburguesa */
+@media(max-width:768px) {
+    .nav-links {
+        display: none
+    }
+
+    .hamburger {
+        display: flex
+    }
+
+    .mobile-menu {
+        display: block
+    }
+
+    .page {
+        padding: 5rem 1rem 2.5rem
+    }
+
+    .demo-row {
+        gap: .85rem
+    }
+
+    .card {
+        padding: .85rem .95rem
+    }
+
+    .box,
+    .scene-3d {
+        width: 60px;
+        height: 60px;
+        font-size: .77rem
+    }
+}
+
+/* ≤420px: ajustes extra para móvil pequeño */
+@media(max-width:420px) {
+    .nav-logo {
+        font-size: .85rem
+    }
+
+    .theme-btn {
+        width: 18px;
+        height: 18px
+    }
+
+    .box,
+    .scene-3d {
+        width: 54px;
+        height: 54px
+    }
+
+    .house-body,
+    .house-roof,
+    .house-door,
+    .house-window {
+        display: none
+    }
+}
+
+/* === FOOTER === */
+ footer {
+     padding-block: 2rem;
+     text-align: center;
+     color: var(--muted);
+     font-size: .8rem;
+     border-top: 1px solid var(--border);
+     transition: border-color .4s, color .4s;
+ }
+
+ footer strong {
+     color: var(--accent);
+     transition: color .4s;
+ }

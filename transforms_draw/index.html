@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="dark-purple">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Transformaciones y Dibujos en Introducción al CSS</title>
+  <link rel="icon" href="https://desingdata.github.io/desingdata/img/DesingData_favicon-96x96.png" sizes="96x96" type="image/png">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="navbar" role="navigation" aria-label="Navegación principal">
+    <span class="nav-logo">⬡ CSS Transform &amp; Draw</span>
+
+    <!-- Links desktop -->
+    <ul class="nav-links" role="list">
+      <li><a href="#s2d">2D</a></li>
+      <li><a href="#s3d">3D</a></li>
+      <li><a href="#sformas">Formas</a></li>
+      <li><a href="#spaisaje">Paisaje</a></li>
+      <li><a href="#sresumen">Resumen</a></li>
+    </ul>
+
+    <div class="nav-controls">
+      <!-- Selector de tema desktop -->
+      <div class="theme-picker" role="group" aria-label="Tema de color">
+        <button class="theme-btn active" data-theme="dark-purple" title="Púrpura"></button>
+        <button class="theme-btn"        data-theme="ocean"       title="Océano"></button>
+        <button class="theme-btn"        data-theme="forest"      title="Bosque"></button>
+        <button class="theme-btn"        data-theme="sunset"      title="Atardecer"></button>
+        <button class="theme-btn"        data-theme="light"       title="Claro"></button>
+      </div>
+      <!-- Hamburguesa -->
+      <button class="hamburger" id="hamburger" aria-label="Abrir menú" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- MENÚ MÓVIL -->
+  <div class="mobile-menu" id="mobileMenu" aria-hidden="true">
+    <ul role="list">
+      <li><a href="#s2d"      class="ml">⟲ Transformaciones 2D</a></li>
+      <li><a href="#s3d"      class="ml">⬡ Transformaciones 3D</a></li>
+      <li><a href="#sformas"  class="ml">◆ Formas con CSS</a></li>
+      <li><a href="#spaisaje" class="ml">🏔 Paisaje CSS</a></li>
+      <li><a href="#sresumen" class="ml">📋 Resumen</a></li>
+    </ul>
+    <div class="mobile-theme-row">
+      <span class="mobile-theme-label">Tema</span>
+      <button class="theme-btn active" data-theme="dark-purple" title="Púrpura"></button>
+      <button class="theme-btn"        data-theme="ocean"       title="Océano"></button>
+      <button class="theme-btn"        data-theme="forest"      title="Bosque"></button>
+      <button class="theme-btn"        data-theme="sunset"      title="Atardecer"></button>
+      <button class="theme-btn"        data-theme="light"       title="Claro"></button>
+    </div>
+  </div>
+
+  <!-- CONTENIDO -->
+  <main class="page">
+
+    <h1>Transformaciones y Dibujos en CSS</h1>
+    <p class="subtitle">Proyecto práctico comentado · hover sobre los elementos para ver cada efecto</p>
+
+    <!-- 2D -->
+    <section class="section" id="s2d">
+      <h2>1. Transformaciones 2D</h2>
+      <p>
+        <code>transform</code> aplica funciones geométricas 2D <em>sin alterar el flujo</em>.
+        Se animan con <code>transition</code>.
+      </p>
+      <div class="demo-row">
+        <div class="card"><div class="box translate">↗</div><div class="label">translate(20px,−20px)<br><span>Desplazamiento</span></div></div>
+        <div class="card"><div class="box rotate">⟳</div><div class="label">rotate(45deg)<br><span>Rotación</span></div></div>
+        <div class="card"><div class="box scale">⤡</div><div class="label">scale(1.4)<br><span>Escalado</span></div></div>
+        <div class="card"><div class="box skew">⟋</div><div class="label">skewX(20deg)<br><span>Deformación</span></div></div>
+        <div class="card"><div class="box combined">✦</div><div class="label">translate+rotate+scale<br><span>Combinada</span></div></div>
+      </div>
+      <div class="code-block"><span class="cmt">/* translate: desplaza sin ocupar nuevo espacio */</span>
+<span class="prop">.translate</span>:<span class="kw">hover</span> { <span class="prop">transform</span>: <span class="val">translate(18px, -18px)</span>; }
+
+<span class="cmt">/* rotate: gira sobre el eje Z, positivo = horario */</span>
+<span class="prop">.rotate</span>:<span class="kw">hover</span>   { <span class="prop">transform</span>: <span class="val">rotate(45deg)</span>; }
+
+<span class="cmt">/* scale: agranda/reduce; 1 = tamaño original */</span>
+<span class="prop">.scale</span>:<span class="kw">hover</span>    { <span class="prop">transform</span>: <span class="val">scale(1.4)</span>; }
+
+<span class="cmt">/* skew: sesga/inclina el elemento en diagonal */</span>
+<span class="prop">.skew</span>:<span class="kw">hover</span>     { <span class="prop">transform</span>: <span class="val">skewX(20deg)</span>; }
+
+<span class="cmt">/* combinada: múltiples funciones separadas por espacio */</span>
+<span class="prop">.combined</span>:<span class="kw">hover</span> { <span class="prop">transform</span>: <span class="val">translate(8px,-8px) rotate(30deg) scale(1.15)</span>; }</div>
+    </section>
+
+    <!-- 3D -->
+    <section class="section" id="s3d">
+      <h2>2. Transformaciones 3D y Perspectiva CSS</h2>
+      <p>
+        <code>perspective</code> en el padre define el punto de fuga.
+        <code>transform-style: preserve-3d</code> propaga el espacio 3D a los hijos.
+      </p>
+      <div class="demo-row">
+        <div class="card"><div class="scene-3d"><div class="box flip-y">Y</div></div><div class="label">rotateY(180deg)<br><span>Eje vertical</span></div></div>
+        <div class="card"><div class="scene-3d"><div class="box flip-x">X</div></div><div class="label">rotateX(180deg)<br><span>Eje horizontal</span></div></div>
+        <div class="card"><div class="scene-3d"><div class="box flip-z">Z</div></div><div class="label">rotateZ(180deg)<br><span>Eje profundidad</span></div></div>
+        <div class="card"><div class="scene-3d"><div class="box move3d">3D</div></div><div class="label">translate3d + rotateY<br><span>Movimiento 3D</span></div></div>
+      </div>
+      <div class="code-block"><span class="cmt">/* perspective en el PADRE — crea el punto de fuga */</span>
+<span class="prop">.scene-3d</span> { <span class="prop">perspective</span>: <span class="val">500px</span>; }
+
+<span class="cmt">/* preserve-3d — hereda el espacio 3D en hijos */</span>
+<span class="prop">.flip-y</span> { <span class="prop">transform-style</span>: <span class="val">preserve-3d</span>; <span class="prop">transition</span>: <span class="val">transform .6s</span>; }
+
+<span class="cmt">/* rotateY — gira sobre el eje vertical (voltear de lado) */</span>
+<span class="prop">.scene-3d:hover .flip-y</span> { <span class="prop">transform</span>: <span class="val">rotateY(180deg)</span>; }
+
+<span class="cmt">/* translate3d(x,y,z) — mueve en los tres ejes */</span>
+<span class="prop">.scene-3d:hover .move3d</span> { <span class="prop">transform</span>: <span class="val">translate3d(8px,-8px,40px) rotateY(25deg)</span>; }</div>
+    </section>
+
+    <!-- FORMAS -->
+    <section class="section" id="sformas">
+      <h2>3. Dibujar con CSS — Formas Básicas</h2>
+      <p>
+        <code>border-radius</code>, bordes transparentes, <code>clip-path</code>
+        y <code>::before</code>/<code>::after</code> permiten crear figuras sin imágenes.
+      </p>
+      <div class="demo-row">
+        <div class="card"><div class="circle"></div><div class="label">Círculo<br><span>border-radius:50%</span></div></div>
+        <div class="card"><div class="triangle"></div><div class="label">Triángulo<br><span>Truco de bordes</span></div></div>
+        <div class="card"><div class="triangle-down"></div><div class="label">Triángulo inv.<br><span>border-top</span></div></div>
+        <div class="card" style="padding:1.2rem 1.4rem"><div class="diamond"></div><div class="label">Rombo<br><span>rotate(45deg)</span></div></div>
+        <div class="card" style="padding:1.2rem 1.4rem"><div class="star"></div><div class="label">Estrella<br><span>2 triángulos</span></div></div>
+        <div class="card" style="padding:1.2rem 1.4rem"><div class="heart"></div><div class="label">Corazón<br><span>::before+::after</span></div></div>
+        <div class="card" style="padding:1.2rem 1.4rem"><div class="cloud"></div><div class="label">Nube<br><span>border-radius+pseudo</span></div></div>
+        <div class="card"><div class="hexagon"></div><div class="label">Hexágono<br><span>clip-path</span></div></div>
+        <div class="card"><div class="arrow-shape"></div><div class="label">Flecha<br><span>clip-path</span></div></div>
+      </div>
+      <div class="code-block"><span class="cmt">/* CÍRCULO — border-radius al 50% convierte el cuadrado */</span>
+<span class="prop">.circle</span> { <span class="prop">border-radius</span>: <span class="val">50%</span>; }
+
+<span class="cmt">/* TRIÁNGULO — elemento 0×0; solo un borde tiene color */</span>
+<span class="prop">.triangle</span> {
+  <span class="prop">width</span>: <span class="val">0</span>; <span class="prop">height</span>: <span class="val">0</span>;
+  <span class="prop">border-left</span>:   <span class="val">34px solid transparent</span>;
+  <span class="prop">border-right</span>:  <span class="val">34px solid transparent</span>;
+  <span class="prop">border-bottom</span>: <span class="val">60px solid var(--a2)</span>;
+}
+
+<span class="cmt">/* CLIP-PATH — recorta según coordenadas porcentuales */</span>
+<span class="prop">.hexagon</span> { <span class="prop">clip-path</span>: <span class="val">polygon(25% 0%,75% 0%,100% 50%,75% 100%,25% 100%,0% 50%)</span>; }
+
+<span class="cmt">/* PSEUDO-ELEMENTOS — capas extra sin HTML adicional */</span>
+<span class="prop">.cloud</span>::<span class="kw">before</span>, <span class="prop">.cloud</span>::<span class="kw">after</span> {
+  <span class="prop">content</span>: <span class="val">''</span>; <span class="prop">position</span>: <span class="val">absolute</span>; <span class="prop">border-radius</span>: <span class="val">50%</span>;
+}</div>
+    </section>
+
+    <!-- PAISAJE -->
+    <section class="section" id="spaisaje">
+      <h2>4. Figura Completa — Paisaje CSS</h2>
+      <p>
+        Todas las técnicas combinadas. Los colores usan variables CSS para
+        adaptarse automáticamente al tema activo.
+      </p>
+      <div class="scene">
+        <div class="sun"></div>
+        <div class="cloud-scene"><div class="cloud"></div></div>
+        <div class="mountain"></div>
+        <div class="mountain2"></div>
+        <div class="house-body"><div class="house-window"></div><div class="house-door"></div></div>
+        <div class="house-roof"></div>
+      </div>
+      <div class="code-block"><span class="cmt">/* Lienzo: position:relative + overflow:hidden */</span>
+<span class="prop">.scene</span> { <span class="prop">position</span>: <span class="val">relative</span>; <span class="prop">overflow</span>: <span class="val">hidden</span>; }
+
+<span class="cmt">/* SOL — círculo con sombra luminosa */</span>
+<span class="prop">.sun</span> { <span class="prop">border-radius</span>: <span class="val">50%</span>; <span class="prop">box-shadow</span>: <span class="val">0 0 26px 10px …</span>; }
+
+<span class="cmt">/* MONTAÑA — triángulo; ::after agrega la nieve */</span>
+<span class="prop">.mountain</span>::<span class="kw">after</span> { <span class="prop">content</span>: <span class="val">''</span>; <span class="prop">border-bottom</span>: <span class="val">42px solid white</span>; … }
+
+<span class="cmt">/* Variables CSS hacen los colores reactivos al tema */</span>
+<span class="prop">.sun</span> { <span class="prop">background</span>: <span class="val">var(--a4)</span>; }</div>
+    </section>
+
+    <!-- RESUMEN -->
+    <section class="section" id="sresumen">
+      <h2>5. Resumen de Conceptos</h2>
+      <div class="summary-grid">
+        <div class="summary-card"><strong>transform</strong><p>Propiedad base que aplica funciones geométricas sin modificar el flujo.</p></div>
+        <div class="summary-card"><strong>translate(x,y)</strong><p>Desplaza en X/Y manteniendo el espacio reservado en el layout.</p></div>
+        <div class="summary-card"><strong>rotate(deg)</strong><p>Gira sobre el eje Z. Positivo = sentido horario.</p></div>
+        <div class="summary-card"><strong>scale(x,y)</strong><p>Cambia el tamaño visible sin afectar las dimensiones reales.</p></div>
+        <div class="summary-card"><strong>skew(xDeg,yDeg)</strong><p>Sesga el elemento creando efectos de paralelogramo.</p></div>
+        <div class="summary-card"><strong>perspective</strong><p>Define el punto de fuga para dar profundidad al espacio 3D.</p></div>
+        <div class="summary-card"><strong>preserve-3d</strong><p>Propaga el espacio 3D del padre a los elementos hijos.</p></div>
+        <div class="summary-card"><strong>border-radius</strong><p>Redondea esquinas; al 50% en un cuadrado produce un círculo.</p></div>
+        <div class="summary-card"><strong>clip-path</strong><p>Recorta el elemento según un polígono, creando cualquier figura.</p></div>
+        <div class="summary-card"><strong>::before / ::after</strong><p>Pseudo-elementos que añaden capas extra sin HTML adicional.</p></div>
+        <div class="summary-card"><strong>var(--variable)</strong><p>Variables CSS que permiten cambiar toda la paleta desde un punto.</p></div>
+        <div class="summary-card"><strong>transition</strong><p>Anima suavemente el cambio de propiedades en tiempo definido.</p></div>
+      </div>
+    </section>
+
+  </main>
+   <footer>
+      <span class="footer-tag">
+        <a style="text-decoration: none;" href="https://desingdata.github.io/desingdata/" target="_blank">Desing Data</a> 2026
+    </span> 
+    <span class="footer-tag">
+         ·By <a style="text-decoration: none;" href="https://miguelmauricioriveralopez18686.github.io/mrlPortafolio/" target="_blank">
+      Miguel Mauricio Rivera López</a>.
+    </span>
+    </div>
+  </footer>
+
+  <script src="js/script.js"></script>
+</body>
+</html>
