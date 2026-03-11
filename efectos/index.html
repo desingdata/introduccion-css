@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="noche">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Efectos en CSS </title>
+  <link rel="icon" href="https://desingdata.github.io/desingdata/img/DesingData_favicon-96x96.png" sizes="96x96" type="image/png">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<!-- ══════════════════════════════════════════
+     NAVBAR RESPONSIVA
+══════════════════════════════════════════ -->
+<nav class="navbar" role="navigation" aria-label="Navegación principal">
+
+  <a href="#inicio" class="nav-logo">✦ Efectos CSS</a>
+
+  <div class="nav-spacer"></div>
+
+  <!-- Links de sección (se colapsan en móvil) -->
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#sombras-texto">💬 Texto</a></li>
+    <li><a href="#sombras-caja">📦 Cajas</a></li>
+    <li><a href="#sombras-identicas">✨ Idénticas</a></li>
+    <li><a href="#pixel-art">🎮 Pixel</a></li>
+    <li><a href="#filtros">🎨 Filtros</a></li>
+    <li><a href="#blend">🌈 Blend</a></li>
+    <li><a href="#clip-path">✂️ Clip</a></li>
+    <li><a href="#shapes">📐 Shapes</a></li>
+    <li><a href="#mascaras">🎭 Máscaras</a></li>
+  </ul>
+
+  <!-- Selector de tema -->
+  <div class="theme-picker" id="themePicker">
+    <button class="theme-btn" id="themeToggle" aria-expanded="false" aria-haspopup="true">
+      <span class="dot"></span>
+      <span id="themeLabel">Noche</span>
+      ▾
+    </button>
+
+    <!-- Panel de opciones: cada botón define qué tema aplica -->
+    <div class="theme-dropdown" id="themeDropdown" role="menu">
+
+      <button class="theme-option active" data-theme="noche" role="menuitem">
+        <div class="theme-swatch">
+          <span style="background:#0f0f1a;border:1px solid #555"></span>
+          <span style="background:#e94560"></span>
+          <span style="background:#533483"></span>
+        </div>
+        Noche
+      </button>
+
+      <button class="theme-option" data-theme="aurora" role="menuitem">
+        <div class="theme-swatch">
+          <span style="background:#071a12;border:1px solid #555"></span>
+          <span style="background:#10d9a0"></span>
+          <span style="background:#1a8a63"></span>
+        </div>
+        Aurora
+      </button>
+
+      <button class="theme-option" data-theme="fuego" role="menuitem">
+        <div class="theme-swatch">
+          <span style="background:#1a0a00;border:1px solid #555"></span>
+          <span style="background:#ff6b35"></span>
+          <span style="background:#c43b00"></span>
+        </div>
+        Fuego
+      </button>
+
+      <button class="theme-option" data-theme="oceano" role="menuitem">
+        <div class="theme-swatch">
+          <span style="background:#030d1a;border:1px solid #555"></span>
+          <span style="background:#38bdf8"></span>
+          <span style="background:#1d5c9e"></span>
+        </div>
+        Océano
+      </button>
+
+      <button class="theme-option" data-theme="rosa" role="menuitem">
+        <div class="theme-swatch">
+          <span style="background:#fff0f5;border:1px solid #ddd"></span>
+          <span style="background:#db2777"></span>
+          <span style="background:#be185d"></span>
+        </div>
+        Rosa
+      </button>
+
+      <button class="theme-option" data-theme="claro" role="menuitem">
+        <div class="theme-swatch">
+          <span style="background:#f8fafc;border:1px solid #ddd"></span>
+          <span style="background:#6366f1"></span>
+          <span style="background:#4f46e5"></span>
+        </div>
+        Claro
+      </button>
+
+    </div>
+  </div>
+
+  <!-- Botón hamburguesa (móvil) -->
+  <button class="hamburger" id="hamburger" aria-label="Abrir menú" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+
+</nav>
+
+
+<!-- ══════════════════════════════════════════
+     HERO
+══════════════════════════════════════════ -->
+<header class="hero" id="inicio">
+  <h1>Efectos CSS</h1>
+  <p>Proyecto práctico: Sombras · Filtros · Modos de fusión · Máscaras · Recortes — todo comentado con definiciones.</p>
+  <div class="hero-theme-badge">
+    <span class="dot" style="width:8px;height:8px;border-radius:50%;background:var(--accent1);display:inline-block"></span>
+    Tema activo: <strong id="heroBadge">Noche</strong>
+  </div>
+</header>
+
+
+<!-- ══════════════════════════════════════════
+     CONTENIDO PRINCIPAL
+══════════════════════════════════════════ -->
+<main class="container">
+
+  <!-- ═══ 1. SOMBRAS EN TEXTOS ═══ -->
+  <section id="sombras-texto">
+    <h2 class="section-title">💬 Sombras en Textos <span class="tag">text-shadow</span></h2>
+    <p class="section-desc"><strong>text-shadow</strong> aplica una o varias sombras al contorno del texto. Acepta múltiples capas separadas por comas. Sintaxis: <code>text-shadow: x y blur color</code></p>
+    <div class="grid">
+      <div class="card">
+        <div class="card-demo"><span class="demo-text-simple">Hola CSS</span></div>
+        <div class="card-info"><h3>Sombra Simple</h3><p>Desplazamiento positivo en X e Y con blur suave. La base de cualquier sombra de texto.</p><code>text-shadow: 4px 4px 8px rgba(0,0,0,.8);</code></div>
+      </div>
+      <div class="card">
+        <div class="card-demo" style="background:#0a0010"><span class="demo-text-glow">GLOW</span></div>
+        <div class="card-info"><h3>Efecto Glow</h3><p>Múltiples sombras sin desplazamiento y blur creciente simulan luz difusa de neón.</p><code>text-shadow:
+  0 0 10px #e94560,
+  0 0 30px #e94560,
+  0 0 60px #e94560;</code></div>
+      </div>
+      <div class="card">
+        <div class="card-demo"><span class="demo-text-3d">3D</span></div>
+        <div class="card-info"><h3>Texto 3D</h3><p>Sombras escalonadas en diagonal con blur 0 crean profundidad volumétrica en el texto.</p><code>text-shadow:
+  1px 1px 0 #c73450,
+  2px 2px 0 #a82a40,
+  5px 5px 10px #000;</code></div>
+      </div>
+      <div class="card">
+        <div class="card-demo"><span class="demo-text-stroke">STROKE</span></div>
+        <div class="card-info"><h3>Stroke Simulado</h3><p>Cuatro sombras en las diagonales ±2px sin blur imitan un contorno exterior al texto.</p><code>text-shadow:
+  -2px -2px 0 #a855f7,
+   2px  2px 0 #a855f7,
+  -2px  2px 0 #a855f7,
+   2px -2px 0 #a855f7;</code></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ 2. SOMBRAS EN CAJAS ═══ -->
+  <section id="sombras-caja">
+    <h2 class="section-title">📦 Sombras en Cajas <span class="tag">box-shadow</span></h2>
+    <p class="section-desc"><strong>box-shadow</strong> dibuja sombras alrededor o dentro de la caja. Con <em>inset</em> la sombra se proyecta hacia el interior. Sintaxis: <code>box-shadow: [inset] x y blur spread color</code></p>
+    <div class="grid">
+      <div class="card">
+        <div class="card-demo"><div class="demo-box-base"></div></div>
+        <div class="card-info"><h3>Sombra Exterior</h3><p>Sombra clásica con desplazamiento y blur para dar sensación de elevación al elemento.</p><code>box-shadow: 6px 6px 20px rgba(0,0,0,.6);</code></div>
+      </div>
+      <div class="card">
+        <div class="card-demo" style="background:#050510"><div class="demo-box-glow"></div></div>
+        <div class="card-info"><h3>Glow Box</h3><p>Sombras con blur creciente y opacidad reducida crean un halo luminoso de color alrededor.</p><code>box-shadow:
+  0 0 15px var(--accent1),
+  0 0 40px …,
+  0 0 80px …;</code></div>
+      </div>
+      <div class="card">
+        <div class="card-demo"><div class="demo-box-inset"></div></div>
+        <div class="card-info"><h3>Sombra Inset</h3><p><code>inset</code> invierte la dirección: la sombra queda dentro del elemento, efecto prensado.</p><code>box-shadow:
+  inset -6px -6px 12px #fff2,
+  inset  6px  6px 12px #0008;</code></div>
+      </div>
+      <div class="card">
+        <div class="card-demo"><div class="demo-box-multi"></div></div>
+        <div class="card-info"><h3>Múltiples Sombras</h3><p>Sombras apiladas: contornos con spread grande y blur 0, más una última capa de elevación.</p><code>box-shadow:
+  0 0 0 4px …,
+  0 0 0 8px …,
+  0 20px 40px #0008;</code></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ 3. SOMBRAS IDÉNTICAS ═══ -->
+  <section id="sombras-identicas">
+    <h2 class="section-title">✨ Sombras Idénticas <span class="tag">múltiples capas</span></h2>
+    <p class="section-desc">Repetir <strong>box-shadow</strong> con el mismo color pero diferente blur o spread produce efectos decorativos como neón o retro sin imágenes adicionales.</p>
+    <div class="grid">
+      <div class="card">
+        <div class="card-demo" style="background:#000"><div class="demo-neon-card">NEON</div></div>
+        <div class="card-info"><h3>Efecto Neón</h3><p>El mismo color con blurs 5px, 15px y 30px apila capas que simulan la luminosidad de tubo de gas.</p><code>box-shadow:
+  0 0  5px #0ff,
+  0 0 15px #0ff,
+  0 0 30px #0ff;</code></div>
+      </div>
+      <div class="card">
+        <div class="card-demo"><div class="demo-retro">RETRO</div></div>
+        <div class="card-info"><h3>Efecto Retro</h3><p>Sombras con offset diagonal creciente y colores distintos imitan carteles tipográficos de los 80s.</p><code>box-shadow:
+  4px  4px 0 #f97316,
+  8px  8px 0 #dc2626,
+  12px 12px 0 #7c3aed;</code></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ 4. PIXEL ART ═══ -->
+  <section id="pixel-art">
+    <h2 class="section-title">🎮 Pixel Art con CSS <span class="tag">box-shadow</span></h2>
+    <p class="section-desc">Usando un elemento de <strong>1×1 px</strong> con <code>box-shadow</code> sin blur ni spread se pinta cada "píxel" en coordenadas x/y específicas, creando sprites sin ninguna imagen.</p>
+    <div class="grid">
+      <div class="card">
+        <div class="card-demo"><div class="pixel-heart"></div></div>
+        <div class="card-info"><h3>Corazón Pixel</h3><p>Cada sombra = un pixel: <code>x y 0 0 color</code>. Con <code>transform: scale(14)</code> se amplía para ser visible.</p><code>/* Elemento base: 1px × 1px */
+box-shadow:
+  2px 1px 0 0 var(--accent1),
+  /* … más píxeles … */;
+transform: scale(14);</code></div>
+      </div>
+      <div class="card">
+        <div class="card-demo">
+          <div style="position:relative;width:180px;height:160px;display:flex;align-items:center;justify-content:center">
+            <div class="pixel-canvas"></div>
+          </div>
+        </div>
+        <div class="card-info"><h3>Carita Pixel</h3><p>Cara, ojos y sonrisa como coordenadas. Con <code>spread</code> mayor se crean píxeles más grandes.</p><code>/* Cara: spread 8px */
+box-shadow:
+  10px 5px 0 8px #fcd34d,
+  /* Ojo: spread 1px */
+  8px 7px 0 1px #000;</code></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ 5. FILTROS CSS ═══ -->
+  <section id="filtros">
+    <h2 class="section-title">🎨 Filtros CSS <span class="tag">filter</span></h2>
+    <p class="section-desc"><strong>filter</strong> aplica efectos de procesamiento de imagen al elemento y sus descendientes. Múltiples funciones separadas por espacio se aplican en cadena.</p>
+    <div class="grid">
+      <div class="card">
+        <div class="card-demo"><div class="filter-img filter-blur"></div></div>
+        <div class="card-info"><h3>blur()</h3><p>Desenfoca el elemento. El valor en px controla el radio del desenfoque gaussiano.</p><code>filter: blur(4px);</code></div>
+      </div>
+      <div class="card">
+        <div class="card-demo"><div class="filter-img filter-bright"></div></div>
+        <div class="card-info"><h3>brightness()</h3><p>0 = negro total · 1 = sin cambio · valores >1 aumentan la luminosidad del elemento.</p><code>filter: brightness(1.8);</code></div>
+      </div>
+      <div class="card">
+        <div class="card-demo"><div class="filter-img filter-gray"></div></div>
+        <div class="card-info"><h3>grayscale()</h3><p>Convierte colores a escala de grises. 0 = color original · 1 = gris completo.</p><code>filter: grayscale(1);</code></div>
+      </div>
+      <div class="card">
+        <div class="card-demo"><div class="filter-img filter-hue"></div></div>
+        <div class="card-info"><h3>hue-rotate()</h3><p>Gira el matiz en la rueda de color 0–360°. Útil para recolorizar sin tocar el CSS fuente.</p><code>filter: hue-rotate(180deg);</code></div>
+      </div>
+      <div class="card">
+        <div class="card-demo"><div class="filter-img filter-contrast"></div></div>
+        <div class="card-info"><h3>contrast()</h3><p>Aumenta la diferencia entre zonas claras y oscuras. Valores >1 intensifican el contraste.</p><code>filter: contrast(2);</code></div>
+      </div>
+      <div class="card">
+        <div class="card-demo"><div class="filter-img filter-saturate"></div></div>
+        <div class="card-info"><h3>saturate()</h3><p>Controla la intensidad del color. 0 = gris · 1 = normal · valores altos = hipersaturado.</p><code>filter: saturate(4);</code></div>
+      </div>
+      <div class="card">
+        <div class="card-demo"><div class="filter-img filter-sepia"></div></div>
+        <div class="card-info"><h3>sepia()</h3><p>Aplica un tono cálido marrón dorado, como el aspecto de fotografías históricas antiguas.</p><code>filter: sepia(1);</code></div>
+      </div>
+      <div class="card">
+        <div class="card-demo"><div class="filter-img filter-invert"></div></div>
+        <div class="card-info"><h3>invert()</h3><p>Invierte todos los canales de color. Con una línea puede implementarse modo oscuro.</p><code>filter: invert(1);</code></div>
+      </div>
+      <div class="card">
+        <div class="card-demo" style="background:#050510"><div class="filter-img filter-dropshadow"></div></div>
+        <div class="card-info"><h3>drop-shadow()</h3><p>Como box-shadow pero respeta el canal alfa: la sombra sigue el contorno real del elemento.</p><code>filter: drop-shadow(0 0 12px var(--accent1));</code></div>
+      </div>
+      <div class="card">
+        <div class="card-demo"><div class="filter-img filter-combo"></div></div>
+        <div class="card-info"><h3>Filtros Combinados</h3><p>Múltiples funciones separadas por espacio se aplican en cadena de izquierda a derecha.</p><code>filter:
+  brightness(1.3)
+  saturate(2)
+  hue-rotate(30deg);</code></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ 6. MODOS DE FUSIÓN ═══ -->
+  <section id="blend">
+    <h2 class="section-title">🌈 Modos de Fusión <span class="tag">mix-blend-mode</span></h2>
+    <p class="section-desc"><strong>mix-blend-mode</strong> define cómo los píxeles de un elemento se mezclan con los del fondo. <strong>background-blend-mode</strong> hace lo mismo entre capas de <code>background</code>.</p>
+    <div class="grid">
+      <div class="card">
+        <div class="card-demo" style="background:linear-gradient(135deg,#38bdf8,#f97316)">
+          <div class="blend-wrapper"><div class="blend-bg"></div><div class="blend-text blend-multiply">MIX</div></div>
+        </div>
+        <div class="card-info"><h3>multiply</h3><p>Multiplica los canales RGB: siempre más oscuro. Ideal para textos sobre fotografías.</p><code>mix-blend-mode: multiply;</code></div>
+      </div>
+      <div class="card">
+        <div class="card-demo" style="background:#000">
+          <div class="blend-wrapper"><div class="blend-bg"></div><div class="blend-text blend-screen">MIX</div></div>
+        </div>
+        <div class="card-info"><h3>screen</h3><p>Opuesto a multiply: siempre más brillante. Perfecto para destellos y efectos de luz.</p><code>mix-blend-mode: screen;</code></div>
+      </div>
+      <div class="card">
+        <div class="card-demo">
+          <div class="blend-wrapper"><div class="blend-bg"></div><div class="blend-text blend-overlay">MIX</div></div>
+        </div>
+        <div class="card-info"><h3>overlay</h3><p>Multiply en zonas oscuras + screen en claras: aumenta contraste conservando cromaticidad.</p><code>mix-blend-mode: overlay;</code></div>
+      </div>
+      <div class="card">
+        <div class="card-demo">
+          <div class="blend-wrapper"><div class="blend-bg"></div><div class="blend-text blend-difference">MIX</div></div>
+        </div>
+        <div class="card-info"><h3>difference</h3><p>Resta el canal oscuro del claro. Colores idénticos dan negro; opuestos dan blanco.</p><code>mix-blend-mode: difference;</code></div>
+      </div>
+      <div class="card">
+        <div class="card-demo">
+          <div class="blend-wrapper"><div class="blend-bg"></div><div class="blend-text blend-exclusion">MIX</div></div>
+        </div>
+        <div class="card-info"><h3>exclusion</h3><p>Variante suavizada de difference: colores iguales dan gris en lugar de negro.</p><code>mix-blend-mode: exclusion;</code></div>
+      </div>
+      <div class="card">
+        <div class="card-demo" style="background:#050510">
+          <div class="blend-wrapper"><div class="blend-bg"></div><div class="blend-text blend-color-dodge">MIX</div></div>
+        </div>
+        <div class="card-info"><h3>color-dodge</h3><p>Aclara el fondo dividiendo por el inverso del color. Crea efectos sobreexpuestos y luminosos.</p><code>mix-blend-mode: color-dodge;</code></div>
+      </div>
+      <div class="card">
+        <div class="card-demo"><div class="blend-bg-mode"></div></div>
+        <div class="card-info"><h3>background-blend-mode</h3><p>Mezcla capas de <code>background</code> entre sí: imagen + gradiente, imagen + color, etc.</p><code>background: url(img), linear-gradient(…);
+background-blend-mode: multiply;</code></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ 7. CLIP-PATH ═══ -->
+  <section id="clip-path">
+    <h2 class="section-title">✂️ clip-path <span class="tag">recortes</span></h2>
+    <p class="section-desc"><strong>clip-path</strong> define la región de recorte: sólo el área interior es visible. Acepta <code>inset()</code>, <code>circle()</code>, <code>ellipse()</code>, <code>polygon()</code> y <code>path()</code>.</p>
+    <div class="grid">
+      <div class="card">
+        <div class="card-demo"><div class="clip-base clip-inset"></div></div>
+        <div class="card-info"><h3>inset()</h3><p>Recorte rectangular con márgenes internos. Acepta <code>round</code> para esquinas redondeadas.</p><code>clip-path: inset(15px 20px round 8px);</code></div>
+      </div>
+      <div class="card">
+        <div class="card-demo"><div class="clip-base clip-circle"></div></div>
+        <div class="card-info"><h3>circle()</h3><p>Recorte circular. El parámetro define el radio; <code>at</code> posiciona el centro.</p><code>clip-path: circle(45% at 50% 50%);</code></div>
+      </div>
+      <div class="card">
+        <div class="card-demo"><div class="clip-base clip-ellipse"></div></div>
+        <div class="card-info"><h3>ellipse()</h3><p>Recorte elíptico con radio horizontal y vertical independientes.</p><code>clip-path: ellipse(50% 35% at 50% 50%);</code></div>
+      </div>
+      <div class="card">
+        <div class="card-demo"><div class="clip-base clip-triangle"></div></div>
+        <div class="card-info"><h3>polygon() — Triángulo</h3><p><code>polygon()</code> acepta cualquier número de vértices X Y separados por comas.</p><code>clip-path: polygon(50% 0%, 0% 100%, 100% 100%);</code></div>
+      </div>
+      <div class="card">
+        <div class="card-demo"><div class="clip-base clip-diamond"></div></div>
+        <div class="card-info"><h3>polygon() — Diamante</h3><p>Cuatro vértices en los extremos centrales de cada lado producen un rombo perfecto.</p><code>clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);</code></div>
+      </div>
+      <div class="card">
+        <div class="card-demo"><div class="clip-base clip-star"></div></div>
+        <div class="card-info"><h3>polygon() — Estrella</h3><p>Diez vértices alternando radios grandes y pequeños forman una estrella de cinco puntas.</p><code>clip-path: polygon(50% 0%, 61% 35%, 98% 35%, …);</code></div>
+      </div>
+      <div class="card">
+        <div class="card-demo"><div class="clip-base clip-hexagon"></div></div>
+        <div class="card-info"><h3>polygon() — Hexágono</h3><p>Seis vértices en proporciones 25/75% generan un hexágono regular, popular en grids.</p><code>clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);</code></div>
+      </div>
+      <div class="card">
+        <div class="card-demo"><div class="clip-base clip-arrow"></div></div>
+        <div class="card-info"><h3>polygon() — Flecha</h3><p>Rectángulo + punta triangular forman una flecha con CSS puro, sin SVG ni imágenes.</p><code>clip-path: polygon(0 20%, 70% 20%, 70% 0%, 100% 50%, 70% 100%, 70% 80%, 0 80%);</code></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ 8. FLOAT + SHAPE-OUTSIDE ═══ -->
+  <section id="shapes">
+    <h2 class="section-title">📐 float + shape-outside <span class="tag">flujo de texto</span></h2>
+    <p class="section-desc"><strong>float</strong> extrae el elemento del flujo y el texto lo rodea. <strong>shape-outside</strong> redefine la forma por la que fluye ese texto, superando la limitación rectangular de float.</p>
+    <div class="grid" style="grid-template-columns:repeat(auto-fill,minmax(min(320px,100%),1fr))">
+      <div class="card">
+        <div class="card-demo" style="height:auto">
+          <div class="shape-demo">
+            <div class="shape-floater shape-circle"></div>
+            El texto fluye alrededor del elemento flotante siguiendo la forma circular definida por
+            <code>shape-outside: circle(50%)</code>. Sin esta propiedad el texto respetaría
+            sólo el borde rectangular de la caja flotante.
+          </div>
+        </div>
+        <div class="card-info"><h3>shape-outside: circle()</h3><p>El texto se adapta al contorno circular del elemento flotante, no a su caja rectangular.</p><code>float: left;
+clip-path: circle(50%);
+shape-outside: circle(50%);</code></div>
+      </div>
+      <div class="card">
+        <div class="card-demo" style="height:auto">
+          <div class="shape-demo">
+            <div class="shape-floater shape-polygon"></div>
+            Aquí <code>shape-outside: polygon()</code> hace que el texto fluya siguiendo
+            un polígono personalizado, logrando composiciones editoriales sofisticadas
+            que antes sólo eran posibles con programas como Adobe InDesign.
+          </div>
+        </div>
+        <div class="card-info"><h3>shape-outside: polygon()</h3><p>Define un polígono arbitrario como guía del flujo de texto alrededor del elemento flotante.</p><code>float: left;
+clip-path: polygon(…);
+shape-outside: polygon(…);</code></div>
+      </div>
+    </div>
+
+    <!-- shape() en su propia sub-sección visual -->
+    <h3 style="margin-top:2.5rem;margin-bottom:0.5rem;font-size:1.2rem;color:var(--text)">🔷 La función <code>shape()</code> <span class="tag" style="font-size:0.7rem;background:var(--accent3)">CSS Shapes Lv.2</span></h3>
+    <p class="section-desc" style="margin-bottom:1.2rem"><strong>shape()</strong> permite definir formas complejas con comandos tipo SVG path directamente en CSS: curvas bezier, arcos y líneas con coordenadas relativas.</p>
+    <div class="grid">
+      <div class="card">
+        <div class="card-demo"><div class="shape-fn-demo"></div></div>
+        <div class="card-info"><h3>shape() con curvas bezier</h3><p>Comandos: <code>from</code>, <code>curve to…with</code> (bezier), <code>line to</code> y <code>close</code>.</p><code>clip-path: shape(
+  from 0% 50%,
+  curve to 30% 0% with 0% 0%,
+  line to 70% 0%,
+  curve to 100% 50% with 100% 0%,
+  close
+);</code></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ 9. MÁSCARAS CSS ═══ -->
+  <section id="mascaras">
+    <h2 class="section-title">🎭 Máscaras CSS <span class="tag">mask-image</span></h2>
+    <p class="section-desc"><strong>mask-image</strong> usa gradientes o imágenes como canal alfa: blanco = visible, negro = oculto. A diferencia de <code>clip-path</code> permite transiciones graduales de opacidad.</p>
+    <div class="grid">
+      <div class="card">
+        <div class="card-demo"><div class="mask-base mask-gradient"></div></div>
+        <div class="card-info"><h3>Gradiente lineal</h3><p>De <em>black</em> (opaco) a <em>transparent</em> (invisible): el elemento se desvanece suavemente.</p><code>mask-image: linear-gradient(
+  to right,
+  black 30%,
+  transparent 100%
+);</code></div>
+      </div>
+      <div class="card">
+        <div class="card-demo"><div class="mask-base mask-radial"></div></div>
+        <div class="card-info"><h3>Gradiente radial</h3><p>Sólo es visible la región circular central; los bordes se desvanecen de forma gradual.</p><code>mask-image: radial-gradient(
+  circle,
+  black 40%,
+  transparent 70%
+);</code></div>
+      </div>
+      <div class="card">
+        <div class="card-demo"><div class="mask-base mask-dots" style="width:160px;height:120px"></div></div>
+        <div class="card-info"><h3>Patrón repetitivo</h3><p><code>mask-size</code> repite la máscara como azulejo, creando patrones de puntos, rayas o cuadrículas.</p><code>mask-image: radial-gradient(circle, black 3px, transparent 4px);
+mask-size: 16px 16px;</code></div>
+      </div>
+      <div class="card">
+        <div class="card-demo"><div class="mask-text-clip">CSS</div></div>
+        <div class="card-info"><h3>background-clip: text</h3><p>Recorta el gradiente de fondo con la silueta del texto: <code>color: transparent</code> lo hace visible.</p><code>background: var(--h-grad);
+background-clip: text;
+color: transparent;</code></div>
+      </div>
+      <div class="card">
+        <div class="card-demo"><div class="mask-base mask-svg" style="width:160px;height:140px"></div></div>
+        <div class="card-info"><h3>Máscara SVG</h3><p>Un SVG con zonas blancas actúa como plantilla: sólo esas áreas dejan ver el elemento.</p><code>mask-image: url("data:image/svg+xml,…");
+mask-size: contain;
+mask-repeat: no-repeat;</code></div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+ <span class="footer-tag">
+        <a style="text-decoration: none;" href="https://desingdata.github.io/desingdata/" target="_blank">Desing Data</a> 2026
+    </span> 
+    <span class="footer-tag">
+         ·By <a style="text-decoration: none;" href="https://miguelmauricioriveralopez18686.github.io/mrlPortafolio/" target="_blank">
+      Miguel Mauricio Rivera López</a>.
+    </span>
+</footer>
+
+<!-- Botón volver arriba -->
+<button class="scroll-top" id="scrollTop" aria-label="Volver arriba">↑</button>
+
+
+<!-- ══════════════════════════════════════════
+     JAVASCRIPT
+     1. Menú hamburguesa (móvil)
+     2. Selector de tema
+     3. Cerrar dropdowns al hacer clic fuera
+     4. Botón scroll-to-top
+     5. Persistencia del tema en localStorage
+══════════════════════════════════════════ -->
+<script src="js/script.js"></script>
+</body>
+</html>

@@ -1,0 +1,976 @@
+/* ════════════════════════════════════════════════════
+       TEMAS DE COLOR — data-theme en <html>
+       Cada tema redefine las variables CSS globales.
+       JavaScript cambia el atributo para alternar temas.
+    ════════════════════════════════════════════════════ */
+
+/* Tema: Noche (oscuro azul-morado, por defecto) */
+[data-theme="noche"] {
+    --bg: #0f0f1a;
+    --surface: #1a1a2e;
+    --surface2: #22223f;
+    --nav-bg: rgba(15, 15, 26, .92);
+    --border: rgba(255, 255, 255, .08);
+    --accent1: #e94560;
+    --accent2: #0f3460;
+    --accent3: #533483;
+    --text: #e0e0e0;
+    --muted: #888;
+    --code-bg: #0d0d1a;
+    --code-text: #7dd3fc;
+    --hero-from: #0f0f1a;
+    --hero-mid: #1a0533;
+    --hero-to: #0f1a3a;
+    --h-grad: linear-gradient(90deg, #e94560, #a855f7, #38bdf8);
+    --card-demo: #111827;
+}
+
+/* Tema: Aurora (oscuro verde-esmeralda) */
+[data-theme="aurora"] {
+    --bg: #071a12;
+    --surface: #0d2b1e;
+    --surface2: #163d2a;
+    --nav-bg: rgba(7, 26, 18, .92);
+    --border: rgba(255, 255, 255, .08);
+    --accent1: #10d9a0;
+    --accent2: #0a6641;
+    --accent3: #1a8a63;
+    --text: #d4f5e9;
+    --muted: #6fac90;
+    --code-bg: #061410;
+    --code-text: #6ee7b7;
+    --hero-from: #071a12;
+    --hero-mid: #0a3320;
+    --hero-to: #051510;
+    --h-grad: linear-gradient(90deg, #10d9a0, #34d399, #6ee7b7);
+    --card-demo: #0a1f15;
+}
+
+/* Tema: Fuego (oscuro naranja-rojo) */
+[data-theme="fuego"] {
+    --bg: #1a0a00;
+    --surface: #2b1200;
+    --surface2: #3d1c00;
+    --nav-bg: rgba(26, 10, 0, .92);
+    --border: rgba(255, 255, 255, .08);
+    --accent1: #ff6b35;
+    --accent2: #8b2500;
+    --accent3: #c43b00;
+    --text: #ffe8d6;
+    --muted: #a07060;
+    --code-bg: #150800;
+    --code-text: #fdba74;
+    --hero-from: #1a0a00;
+    --hero-mid: #3d1600;
+    --hero-to: #200800;
+    --h-grad: linear-gradient(90deg, #ff6b35, #f97316, #fbbf24);
+    --card-demo: #1f0c00;
+}
+
+/* Tema: Océano (oscuro azul profundo) */
+[data-theme="oceano"] {
+    --bg: #030d1a;
+    --surface: #071a33;
+    --surface2: #0e2644;
+    --nav-bg: rgba(3, 13, 26, .92);
+    --border: rgba(255, 255, 255, .08);
+    --accent1: #38bdf8;
+    --accent2: #0c3b6b;
+    --accent3: #1d5c9e;
+    --text: #cce8f8;
+    --muted: #5b8ca8;
+    --code-bg: #021020;
+    --code-text: #7dd3fc;
+    --hero-from: #030d1a;
+    --hero-mid: #071a33;
+    --hero-to: #041020;
+    --h-grad: linear-gradient(90deg, #38bdf8, #60a5fa, #a78bfa);
+    --card-demo: #060f1e;
+}
+
+/* Tema: Rosa (claro pastel) */
+[data-theme="rosa"] {
+    --bg: #fff0f5;
+    --surface: #ffffff;
+    --surface2: #fce7f3;
+    --nav-bg: rgba(255, 240, 245, .95);
+    --border: rgba(0, 0, 0, .08);
+    --accent1: #db2777;
+    --accent2: #9d174d;
+    --accent3: #be185d;
+    --text: #3b1225;
+    --muted: #9f6879;
+    --code-bg: #fdf2f8;
+    --code-text: #be185d;
+    --hero-from: #fce7f3;
+    --hero-mid: #fbcfe8;
+    --hero-to: #f9a8d4;
+    --h-grad: linear-gradient(90deg, #db2777, #ec4899, #f472b6);
+    --card-demo: #fff5f9;
+}
+
+/* Tema: Claro (blanco limpio) */
+[data-theme="claro"] {
+    --bg: #f8fafc;
+    --surface: #ffffff;
+    --surface2: #f1f5f9;
+    --nav-bg: rgba(248, 250, 252, .95);
+    --border: rgba(0, 0, 0, .08);
+    --accent1: #6366f1;
+    --accent2: #3730a3;
+    --accent3: #4f46e5;
+    --text: #1e293b;
+    --muted: #64748b;
+    --code-bg: #f1f5f9;
+    --code-text: #4f46e5;
+    --hero-from: #f8fafc;
+    --hero-mid: #eef2ff;
+    --hero-to: #f0fdf4;
+    --h-grad: linear-gradient(90deg, #6366f1, #8b5cf6, #06b6d4);
+    --card-demo: #f8fafc;
+}
+
+/* ════════════════════════════════════════════════════
+       RESET & BASE
+    ════════════════════════════════════════════════════ */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    /* Offset para que el contenido no quede bajo el nav fijo */
+    scroll-padding-top: 72px;
+    transition: background .3s, color .3s;
+}
+
+/* ════════════════════════════════════════════════════
+       NAVBAR — barra de navegación fija con menú responsivo
+    ════════════════════════════════════════════════════ */
+.navbar {
+    position: fixed;
+    /* fija al tope de la ventana */
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    background: var(--nav-bg);
+    backdrop-filter: blur(16px);
+    /* cristal esmerilado */
+    -webkit-backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--border);
+    height: 64px;
+    display: flex;
+    align-items: center;
+    padding: 0 1.5rem;
+    gap: 1rem;
+    transition: background .3s;
+}
+
+/* Logo */
+.nav-logo {
+    font-size: 1.1rem;
+    font-weight: 800;
+    background: var(--h-grad);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    white-space: nowrap;
+    flex-shrink: 0;
+    text-decoration: none;
+}
+
+/* Espaciador entre logo y links */
+.nav-spacer {
+    flex: 1;
+}
+
+/* Lista de enlaces de navegación */
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: 0.2rem;
+    list-style: none;
+}
+
+.nav-links a {
+    display: block;
+    padding: 0.4rem 0.7rem;
+    font-size: 0.82rem;
+    font-weight: 500;
+    color: var(--muted);
+    text-decoration: none;
+    border-radius: 8px;
+    transition: background .2s, color .2s;
+    white-space: nowrap;
+}
+
+.nav-links a:hover {
+    background: var(--surface2);
+    color: var(--text);
+}
+
+/* ────── SELECTOR DE TEMA ────── */
+.theme-picker {
+    position: relative;
+    flex-shrink: 0;
+}
+
+/* Botón que abre el panel de temas */
+.theme-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.4rem 0.8rem;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 99px;
+    color: var(--text);
+    font-size: 0.8rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background .2s;
+    white-space: nowrap;
+}
+
+.theme-btn:hover {
+    background: var(--accent1);
+    color: #fff;
+}
+
+.theme-btn .dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--accent1);
+    display: inline-block;
+    flex-shrink: 0;
+}
+
+/* Panel desplegable de opciones de tema */
+.theme-dropdown {
+    position: absolute;
+    top: calc(100% + 10px);
+    right: 0;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 0.8rem;
+    display: none;
+    /* oculto por defecto */
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.5rem;
+    min-width: 230px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, .4);
+    z-index: 100;
+}
+
+.theme-dropdown.open {
+    display: grid;
+}
+
+/* Botón individual de cada tema */
+.theme-option {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.35rem;
+    padding: 0.6rem 0.4rem;
+    border: 2px solid transparent;
+    border-radius: 10px;
+    cursor: pointer;
+    background: var(--surface2);
+    transition: border-color .2s, transform .15s;
+    font-size: 0.72rem;
+    font-weight: 600;
+    color: var(--muted);
+}
+
+.theme-option:hover {
+    transform: scale(1.05);
+    border-color: var(--border);
+}
+
+.theme-option.active {
+    border-color: var(--accent1);
+    color: var(--text);
+}
+
+/* Muestra de colores del tema */
+.theme-swatch {
+    display: flex;
+    gap: 3px;
+}
+
+.theme-swatch span {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+}
+
+/* ────── BOTÓN HAMBURGUESA (solo móvil) ────── */
+.hamburger {
+    display: none;
+    /* oculto en desktop */
+    flex-direction: column;
+    gap: 5px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 6px;
+    border-radius: 8px;
+    flex-shrink: 0;
+}
+
+.hamburger span {
+    display: block;
+    width: 22px;
+    height: 2px;
+    background: var(--text);
+    border-radius: 2px;
+    transition: transform .3s, opacity .3s;
+}
+
+/* Animación ✕ cuando el menú está abierto */
+.hamburger.open span:nth-child(1) {
+    transform: translateY(7px) rotate(45deg);
+}
+
+.hamburger.open span:nth-child(2) {
+    opacity: 0;
+}
+
+.hamburger.open span:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg);
+}
+
+/* ════════════════════════════════════════════════════
+       RESPONSIVIDAD NAV — breakpoint 768px
+    ════════════════════════════════════════════════════ */
+@media (max-width: 768px) {
+
+    /* El hamburger aparece */
+    .hamburger {
+        display: flex;
+    }
+
+    /* Los links se convierten en menú desplegable vertical */
+    .nav-links {
+        position: fixed;
+        top: 64px;
+        /* justo debajo del navbar */
+        left: 0;
+        right: 0;
+        background: var(--nav-bg);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        border-bottom: 1px solid var(--border);
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0;
+        padding: 0.8rem 1rem;
+        /* Oculto con transform + opacity para animar suavemente */
+        transform: translateY(-10px);
+        opacity: 0;
+        pointer-events: none;
+        transition: transform .3s, opacity .3s;
+        max-height: calc(100vh - 64px);
+        overflow-y: auto;
+    }
+
+    /* Cuando el menú está abierto */
+    .nav-links.open {
+        transform: translateY(0);
+        opacity: 1;
+        pointer-events: all;
+    }
+
+    .nav-links a {
+        padding: 0.75rem 1rem;
+        font-size: 0.95rem;
+        border-radius: 10px;
+    }
+
+    /* El dropdown de temas se adapta a la derecha */
+    .theme-dropdown {
+        right: -0.5rem;
+        grid-template-columns: repeat(2, 1fr);
+        min-width: 200px;
+    }
+}
+
+/* ════════════════════════════════════════════════════
+       HERO — empujado para compensar el nav fijo
+    ════════════════════════════════════════════════════ */
+.hero {
+    text-align: center;
+    padding: 7rem 2rem 3.5rem;
+    /* top extra por el nav */
+    background: linear-gradient(135deg, var(--hero-from) 0%, var(--hero-mid) 50%, var(--hero-to) 100%);
+    border-bottom: 1px solid var(--border);
+    transition: background .3s;
+}
+
+.hero h1 {
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-weight: 900;
+    letter-spacing: -1px;
+    background: var(--h-grad);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: none;
+}
+
+.hero p {
+    margin-top: 1rem;
+    color: var(--muted);
+    font-size: 1.05rem;
+    max-width: 600px;
+    margin-inline: auto;
+}
+
+/* Indicador del tema activo en el hero */
+.hero-theme-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    margin-top: 1.2rem;
+    padding: 0.3rem 1rem;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 99px;
+    font-size: 0.78rem;
+    color: var(--muted);
+}
+
+/* ════════════════════════════════════════════════════
+       LAYOUT GENERAL
+    ════════════════════════════════════════════════════ */
+.container {
+    max-width: 1200px;
+    margin-inline: auto;
+    padding: 3rem 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 5rem;
+}
+
+/* Secciones con id para anclas del nav */
+section {
+    scroll-margin-top: 80px;
+}
+
+.section-title {
+    font-size: clamp(1.3rem, 3vw, 1.8rem);
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 0.3rem;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    flex-wrap: wrap;
+}
+
+.section-title span.tag {
+    font-size: 0.72rem;
+    background: var(--accent1);
+    color: #fff;
+    padding: 2px 10px;
+    border-radius: 99px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+.section-desc {
+    color: var(--muted);
+    margin-bottom: 2rem;
+    font-size: 0.95rem;
+    max-width: 700px;
+}
+
+/* ════════════════════════════════════════════════════
+       GRID RESPONSIVA
+       — 3 columnas en desktop
+       — 2 en tablet (≤900px)
+       — 1 en móvil  (≤520px)
+    ════════════════════════════════════════════════════ */
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(280px, 100%), 1fr));
+    gap: 1.5rem;
+}
+
+@media (max-width: 900px) {
+    .grid {
+        grid-template-columns: repeat(auto-fill, minmax(min(240px, 100%), 1fr));
+    }
+}
+
+@media (max-width: 520px) {
+    .grid {
+        grid-template-columns: 1fr;
+    }
+
+    .container {
+        padding: 2rem 1rem;
+        gap: 3.5rem;
+    }
+}
+
+/* ════════════════════════════════════════════════════
+       TARJETAS
+    ════════════════════════════════════════════════════ */
+.card {
+    background: var(--surface);
+    border-radius: 12px;
+    border: 1px solid var(--border);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    transition: background .3s, border-color .3s;
+}
+
+.card-demo {
+    height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--card-demo);
+    position: relative;
+    overflow: hidden;
+    transition: background .3s;
+}
+
+.card-info {
+    padding: 1rem 1.2rem;
+}
+
+.card-info h3 {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 0.4rem;
+}
+
+.card-info p {
+    font-size: 0.82rem;
+    color: var(--muted);
+    line-height: 1.5;
+}
+
+.card-info code {
+    display: block;
+    margin-top: 0.7rem;
+    font-size: 0.75rem;
+    background: var(--code-bg);
+    padding: 0.6rem 0.8rem;
+    border-radius: 6px;
+    color: var(--code-text);
+    border-left: 3px solid var(--accent1);
+    white-space: pre-wrap;
+    font-family: 'Cascadia Code', 'Fira Code', monospace;
+    transition: background .3s, color .3s, border-color .3s;
+}
+
+/* ════════════════════════════════════════════════════
+       DEMOS CSS — los mismos que antes, sin cambios de lógica
+    ════════════════════════════════════════════════════ */
+
+/* — text-shadow — */
+.demo-text-simple {
+    font-size: 2.2rem;
+    font-weight: 900;
+    color: var(--text);
+    text-shadow: 4px 4px 8px rgba(0, 0, 0, .8);
+}
+
+.demo-text-glow {
+    font-size: 2.2rem;
+    font-weight: 900;
+    color: #fff;
+    text-shadow: 0 0 10px var(--accent1), 0 0 30px var(--accent1), 0 0 60px var(--accent1);
+}
+
+.demo-text-3d {
+    font-size: 2.2rem;
+    font-weight: 900;
+    color: var(--accent1);
+    text-shadow: 1px 1px 0 var(--accent2), 2px 2px 0 var(--accent3), 5px 5px 10px #000;
+}
+
+.demo-text-stroke {
+    font-size: 2.2rem;
+    font-weight: 900;
+    color: var(--bg);
+    text-shadow: -2px -2px 0 var(--accent3), 2px -2px 0 var(--accent3), -2px 2px 0 var(--accent3), 2px 2px 0 var(--accent3);
+}
+
+/* — box-shadow — */
+.demo-box-base {
+    width: 120px;
+    height: 120px;
+    border-radius: 8px;
+    background: var(--accent2);
+    box-shadow: 6px 6px 20px rgba(0, 0, 0, .6);
+}
+
+.demo-box-glow {
+    width: 120px;
+    height: 120px;
+    border-radius: 8px;
+    background: var(--accent2);
+    box-shadow: 0 0 15px var(--accent1), 0 0 40px color-mix(in srgb, var(--accent1) 40%, transparent), 0 0 80px color-mix(in srgb, var(--accent1) 20%, transparent);
+}
+
+.demo-box-inset {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    background: var(--surface);
+    box-shadow: inset -6px -6px 12px rgba(255, 255, 255, .13), inset 6px 6px 12px rgba(0, 0, 0, .5), 0 10px 30px rgba(0, 0, 0, .3);
+}
+
+.demo-box-multi {
+    width: 120px;
+    height: 120px;
+    border-radius: 12px;
+    background: linear-gradient(135deg, var(--accent3), var(--accent1));
+    box-shadow: 0 0 0 4px color-mix(in srgb, var(--accent1) 33%, transparent), 0 0 0 8px color-mix(in srgb, var(--accent3) 33%, transparent), 0 20px 40px rgba(0, 0, 0, .5);
+}
+
+/* — Sombras idénticas — */
+.demo-neon-card {
+    width: 140px;
+    height: 80px;
+    border-radius: 8px;
+    background: #000;
+    border: 2px solid #0ff;
+    box-shadow: 0 0 5px #0ff, 0 0 15px #0ff, 0 0 30px #0ff, inset 0 0 15px rgba(0, 255, 255, .2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    color: #0ff;
+    font-size: 1.1rem;
+    text-shadow: 0 0 8px #0ff;
+}
+
+.demo-retro {
+    width: 140px;
+    height: 80px;
+    border-radius: 4px;
+    background: #fde68a;
+    color: #111;
+    font-weight: 900;
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 4px 4px 0 #f97316, 8px 8px 0 #dc2626, 12px 12px 0 #7c3aed;
+}
+
+/* — Pixel art — */
+.pixel-canvas {
+    width: 1px;
+    height: 1px;
+    box-shadow: 10px 5px 0 8px #fcd34d, 8px 7px 0 1px #000, 12px 7px 0 1px #000, 8px 10px 0 1px #000, 10px 11px 0 1px #000, 12px 10px 0 1px #000;
+    transform: scale(8);
+    margin: 60px auto;
+    display: block;
+}
+
+.pixel-heart {
+    width: 1px;
+    height: 1px;
+    box-shadow: 2px 1px 0 0 var(--accent1), 3px 1px 0 0 var(--accent1), 5px 1px 0 0 var(--accent1), 6px 1px 0 0 var(--accent1), 1px 2px 0 0 var(--accent1), 2px 2px 0 0 var(--accent1), 3px 2px 0 0 var(--accent1), 4px 2px 0 0 var(--accent1), 5px 2px 0 0 var(--accent1), 6px 2px 0 0 var(--accent1), 7px 2px 0 0 var(--accent1), 1px 3px 0 0 var(--accent1), 2px 3px 0 0 var(--accent1), 3px 3px 0 0 var(--accent1), 4px 3px 0 0 var(--accent1), 5px 3px 0 0 var(--accent1), 6px 3px 0 0 var(--accent1), 7px 3px 0 0 var(--accent1), 2px 4px 0 0 var(--accent1), 3px 4px 0 0 var(--accent1), 4px 4px 0 0 var(--accent1), 5px 4px 0 0 var(--accent1), 6px 4px 0 0 var(--accent1), 3px 5px 0 0 var(--accent1), 4px 5px 0 0 var(--accent1), 5px 5px 0 0 var(--accent1), 4px 6px 0 0 var(--accent1);
+    transform: scale(14);
+    margin: 80px auto 30px;
+    display: block;
+}
+
+/* — filter — */
+.filter-img {
+    width: 120px;
+    height: 120px;
+    border-radius: 8px;
+    background: linear-gradient(135deg, var(--accent1), var(--accent3), var(--accent2));
+}
+
+.filter-blur {
+    filter: blur(4px);
+}
+
+.filter-bright {
+    filter: brightness(1.8);
+}
+
+.filter-gray {
+    filter: grayscale(1);
+}
+
+.filter-hue {
+    filter: hue-rotate(180deg);
+}
+
+.filter-contrast {
+    filter: contrast(2);
+}
+
+.filter-saturate {
+    filter: saturate(4);
+}
+
+.filter-sepia {
+    filter: sepia(1);
+}
+
+.filter-invert {
+    filter: invert(1);
+}
+
+.filter-dropshadow {
+    filter: drop-shadow(0 0 12px var(--accent1));
+}
+
+.filter-combo {
+    filter: brightness(1.3) saturate(2) hue-rotate(30deg);
+}
+
+/* — mix-blend-mode — */
+.blend-wrapper {
+    position: relative;
+    width: 140px;
+    height: 140px;
+}
+
+.blend-bg {
+    width: 100%;
+    height: 100%;
+    border-radius: 8px;
+    background: linear-gradient(135deg, #38bdf8, #a855f7, #f97316);
+}
+
+.blend-text {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    font-weight: 900;
+    color: #fff;
+}
+
+.blend-multiply {
+    mix-blend-mode: multiply;
+}
+
+.blend-screen {
+    mix-blend-mode: screen;
+}
+
+.blend-overlay {
+    mix-blend-mode: overlay;
+}
+
+.blend-difference {
+    mix-blend-mode: difference;
+}
+
+.blend-exclusion {
+    mix-blend-mode: exclusion;
+}
+
+.blend-color-dodge {
+    mix-blend-mode: color-dodge;
+}
+
+.blend-bg-mode {
+    width: 140px;
+    height: 140px;
+    border-radius: 8px;
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100'%3E%3Crect fill='%23e94560' width='100' height='100'/%3E%3Ccircle cx='50' cy='50' r='40' fill='%23533483'/%3E%3C/svg%3E"), linear-gradient(135deg, #38bdf8, #f97316);
+    background-blend-mode: multiply;
+}
+
+/* — clip-path — */
+.clip-base {
+    width: 140px;
+    height: 140px;
+    background: linear-gradient(135deg, var(--accent1), var(--accent3));
+}
+
+.clip-inset {
+    clip-path: inset(15px 20px 15px 20px round 8px);
+}
+
+.clip-circle {
+    clip-path: circle(45% at 50% 50%);
+}
+
+.clip-ellipse {
+    clip-path: ellipse(50% 35% at 50% 50%);
+}
+
+.clip-triangle {
+    clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+}
+
+.clip-diamond {
+    clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+}
+
+.clip-star {
+    clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+}
+
+.clip-arrow {
+    clip-path: polygon(0 20%, 70% 20%, 70% 0%, 100% 50%, 70% 100%, 70% 80%, 0 80%);
+}
+
+.clip-hexagon {
+    clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);
+}
+
+/* — float + shape-outside — */
+.shape-demo {
+    padding: 1.2rem;
+    color: var(--text);
+    font-size: 0.85rem;
+    line-height: 1.8;
+    background: var(--card-demo);
+    border-radius: 8px;
+    overflow: hidden;
+    min-height: 180px;
+}
+
+.shape-floater {
+    width: 110px;
+    height: 110px;
+    background: linear-gradient(135deg, var(--accent1), var(--accent3));
+    margin: 0 1.2rem 0.5rem 0;
+    float: left;
+}
+
+.shape-circle {
+    clip-path: circle(50%);
+    shape-outside: circle(50%);
+}
+
+.shape-polygon {
+    clip-path: polygon(0 0, 100% 0, 60% 100%, 0 100%);
+    shape-outside: polygon(0 0, 100% 0, 60% 100%, 0 100%);
+}
+
+/* — shape() — */
+.shape-fn-demo {
+    width: 200px;
+    height: 140px;
+    background: linear-gradient(135deg, var(--accent1), var(--accent3));
+    margin: 0 auto;
+    clip-path: shape(from 0% 50%, curve to 30% 0% with 0% 0%, line to 70% 0%, curve to 100% 50% with 100% 0%, curve to 70% 100% with 100% 100%, line to 30% 100%, curve to 0% 50% with 0% 100%, close);
+}
+
+/* — mask — */
+.mask-base {
+    width: 160px;
+    height: 120px;
+    background: linear-gradient(135deg, var(--accent1), #38bdf8);
+    border-radius: 8px;
+}
+
+.mask-gradient {
+    mask-image: linear-gradient(to right, black 30%, transparent 100%);
+    -webkit-mask-image: linear-gradient(to right, black 30%, transparent 100%);
+}
+
+.mask-radial {
+    mask-image: radial-gradient(circle, black 40%, transparent 70%);
+    -webkit-mask-image: radial-gradient(circle, black 40%, transparent 70%);
+}
+
+.mask-dots {
+    mask-image: radial-gradient(circle, black 3px, transparent 4px);
+    mask-size: 16px 16px;
+    -webkit-mask-image: radial-gradient(circle, black 3px, transparent 4px);
+    -webkit-mask-size: 16px 16px;
+}
+
+.mask-text-clip {
+    width: 200px;
+    height: 80px;
+    background: var(--h-grad);
+    font-size: 2.5rem;
+    font-weight: 900;
+    line-height: 80px;
+    text-align: center;
+    color: transparent;
+    background-clip: text;
+    -webkit-background-clip: text;
+}
+
+.mask-svg {
+    mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpolygon points='50,5 95,35 80,90 20,90 5,35' fill='white'/%3E%3C/svg%3E");
+    mask-size: contain;
+    mask-repeat: no-repeat;
+    mask-position: center;
+    -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpolygon points='50,5 95,35 80,90 20,90 5,35' fill='white'/%3E%3C/svg%3E");
+    -webkit-mask-size: contain;
+    -webkit-mask-repeat: no-repeat;
+    -webkit-mask-position: center;
+}
+
+/* ════════════════════════════════════════════════════
+       FOOTER
+    ════════════════════════════════════════════════════ */
+footer {
+    text-align: center;
+    padding: 2rem;
+    color: var(--muted);
+    font-size: 0.85rem;
+    border-top: 1px solid var(--border);
+    transition: border-color .3s;
+}
+
+/* ════════════════════════════════════════════════════
+       SCROLL-TO-TOP
+    ════════════════════════════════════════════════════ */
+.scroll-top {
+    position: fixed;
+    bottom: 1.5rem;
+    right: 1.5rem;
+    width: 44px;
+    height: 44px;
+    background: var(--accent1);
+    color: #fff;
+    border: none;
+    border-radius: 50%;
+    font-size: 1.2rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity .3s, transform .3s, background .3s;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, .3);
+    z-index: 999;
+}
+
+.scroll-top.visible {
+    opacity: 1;
+    pointer-events: all;
+}
+
+.scroll-top:hover {
+    transform: translateY(-3px);
+}
