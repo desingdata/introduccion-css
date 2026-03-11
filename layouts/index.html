@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="light">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Layouts en Introducción al CSS</title>
+  <link rel="icon" href="https://desingdata.github.io/desingdata/img/DesingData_favicon-96x96.png" sizes="96x96" type="image/png">
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/themes.css">
+</head>
+
+<body>
+  <!-- ============================================
+         NAVBAR TIPO HAMBURGUESA (RESPONSIVE)
+         ============================================ -->
+  <header class="navbar">
+    <div class="nav-brand">
+      <h1>Layouts CSS</h1>
+    </div>
+
+    <!-- Botón hamburguesa para móvil -->
+    <button class="nav-toggle" id="navToggle" aria-label="Abrir menú">
+      <span class="hamburger"></span>
+      <span class="hamburger"></span>
+      <span class="hamburger"></span>
+    </button>
+
+    <nav class="nav-menu" id="navMenu">
+      <ul class="nav-list">
+        <li><a href="#maquetacion">Maquetación</a></li>
+        <li><a href="#display">Display</a></li>
+        <li><a href="#flex">Flexbox</a></li>
+        <li><a href="#grid">Grid</a></li>
+        <li><a href="#posicionamiento">Posicionamiento</a></li>
+        <li><a href="#anchor">Anchor</a></li>
+      </ul>
+
+      <!-- Botón cambio de tema -->
+      <button class="theme-toggle" id="themeToggle" aria-label="Cambiar tema">
+        <span class="theme-icon">🌙</span>
+      </button>
+    </nav>
+  </header>
+
+  <!-- ============================================
+         SECCIÓN: MAQUETACIÓN Y DISPLAY
+         ============================================ -->
+  <section id="maquetacion" class="section">
+    <h2>📐 Maquetación CSS</h2>
+    <p class="definition">
+      <!-- DEFINICIÓN: Maquetación es el proceso de organizar y estructurar 
+                 el contenido visual de una página web usando CSS -->
+      Proceso de organizar elementos visuales mediante modelos de caja y flujo de documento.
+    </p>
+
+    <!-- Subsección: La propiedad display -->
+    <div id="display" class="subsection">
+      <h3>🎨 La propiedad display</h3>
+      <p class="definition">
+        <!-- DEFINICIÓN: Controla el tipo de caja generada por un elemento 
+                     y cómo se comporta en el flujo del documento -->
+        Define el tipo de renderizado de caja de un elemento (block, inline, none, etc.).
+      </p>
+
+      <div class="demo-box display-demo">
+        <div class="box block-box">Block</div>
+        <div class="box inline-box">Inline</div>
+        <div class="box inline-box">Inline 2</div>
+      </div>
+    </div>
+
+    <!-- Subsección: Display multi-keyword -->
+    <div id="multi-keyword" class="subsection">
+      <h3>🔑 Display Multi-Keyword</h3>
+      <p class="definition">
+        <!-- DEFINICIÓN: Sintaxis moderna de dos valores que separa 
+                     display-outside (externo) de display-inside (interno) -->
+        Sintaxis de dos valores: <code>display: [externo] [interno]</code>.
+        Ej: <code>block flex</code> = caja block con layout flex interno [^1^].
+      </p>
+
+      <div class="demo-grid multi-keyword-demo">
+        <div class="demo-item" style="display: block flex;">
+          <code>block flex</code>
+          <small>Flex container block-level</small>
+        </div>
+        <div class="demo-item" style="display: inline flex;">
+          <code>inline flex</code>
+          <small>Flex container inline-level</small>
+        </div>
+        <div class="demo-item" style="display: block flow-root;">
+          <code>block flow-root</code>
+          <small>Nuevo BFC, contiene floats</small>
+        </div>
+      </div>
+    </div>
+
+    <!-- Subsección: Multi-columnas -->
+    <div id="multicolumn" class="subsection">
+      <h3>📰 Multi-columnas CSS</h3>
+      <p class="definition">
+        <!-- DEFINICIÓN: Permite distribuir contenido de texto en múltiples 
+                     columnas como en periódicos -->
+        Distribuye contenido en columnas automáticas con <code>column-count</code> o <code>column-width</code>.
+      </p>
+
+      <article class="multicolumn-text">
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore
+          magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.</p>
+        <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+          Excepteur sint occaecat cupidatat non proident.</p>
+      </article>
+    </div>
+  </section>
+
+  <!-- ============================================
+         SECCIÓN: FLEXBOX
+         ============================================ -->
+  <section id="flex" class="section">
+    <h2>🧘 Flex CSS</h2>
+    <p class="definition">
+      <!-- DEFINICIÓN: Modelo de layout unidimensional para distribuir 
+                 espacio entre items y alinear contenido -->
+      Layout unidimensional para distribuir espacio y alinear items en una fila o columna.
+    </p>
+
+    <!-- Guía Introducción Flex -->
+    <div class="subsection">
+      <h3>📖 Guía de Introducción a Flex</h3>
+      <div class="flex-container intro-flex">
+        <div class="flex-item">1</div>
+        <div class="flex-item">2</div>
+        <div class="flex-item">3</div>
+        <div class="flex-item">4</div>
+      </div>
+    </div>
+
+    <!-- Alinear y centrar con Flex -->
+    <div class="subsection">
+      <h3>🎯 Alinear y Centrar con Flex</h3>
+      <p class="definition">
+        <!-- DEFINICIÓN: Flex proporciona propiedades como justify-content 
+                     (eje principal) y align-items (eje transversal) -->
+        <code>justify-content</code> controla el eje principal;
+        <code>align-items</code> controla el eje transversal.
+      </p>
+
+      <div class="flex-container center-flex">
+        <div class="flex-item">Centrado</div>
+      </div>
+    </div>
+
+    <!-- Elementos flexibles -->
+    <div class="subsection">
+      <h3>📏 Elementos Flexibles</h3>
+      <p class="definition">
+        <!-- DEFINICIÓN: Propiedades flex-grow, flex-shrink y flex-basis 
+                     controlan cómo crecen o encogen los items -->
+        <code>flex-grow</code>: factor de crecimiento.
+        <code>flex-shrink</code>: factor de encogimiento.
+        <code>flex-basis</code>: tamaño base inicial.
+      </p>
+
+      <div class="flex-container flexible-demo">
+        <div class="flex-item grow-1">flex: 1</div>
+        <div class="flex-item grow-2">flex: 2</div>
+        <div class="flex-item grow-1">flex: 1</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================
+         SECCIÓN: GRID CSS
+         ============================================ -->
+  <section id="grid" class="section">
+    <h2>🔲 Grid CSS</h2>
+    <p class="definition">
+      <!-- DEFINICIÓN: Sistema de layout bidimensional que maneja 
+                 filas y columnas simultáneamente -->
+      Layout bidimensional basado en filas y columnas con control total del espaciado.
+    </p>
+
+    <!-- Guía Introducción Grid -->
+    <div class="subsection">
+      <h3>📖 Guía de Introducción a Grid</h3>
+      <div class="grid-container basic-grid">
+        <div class="grid-item">A</div>
+        <div class="grid-item">B</div>
+        <div class="grid-item">C</div>
+        <div class="grid-item">D</div>
+        <div class="grid-item">E</div>
+        <div class="grid-item">F</div>
+      </div>
+    </div>
+
+    <!-- Alinear y centrar con Grid -->
+    <div class="subsection">
+      <h3>🎯 Alinear y Centrar con Grid</h3>
+      <p class="definition">
+        <!-- DEFINICIÓN: Grid ofrece justify-items, align-items para 
+                     alineación en celdas y place-items como shorthand -->
+        <code>place-items: center</code> centra contenido horizontal y verticalmente en cada celda.
+      </p>
+
+      <div class="grid-container align-grid">
+        <div class="grid-item">Item 1</div>
+        <div class="grid-item">Item 2</div>
+        <div class="grid-item">Item 3</div>
+      </div>
+    </div>
+
+    <!-- Grid por áreas -->
+    <div class="subsection">
+      <h3>🗺️ Grid por Áreas</h3>
+      <p class="definition">
+        <!-- DEFINICIÓN: Permite definir regiones nombradas del layout 
+                     usando grid-template-areas para estructuras semánticas -->
+        Define regiones con nombres semánticos (<code>header, main, sidebar, footer</code>)
+        mediante <code>grid-template-areas</code>.
+      </p>
+
+      <div class="grid-container areas-grid">
+        <header class="area-header">Header</header>
+        <aside class="area-sidebar">Sidebar</aside>
+        <main class="area-main">Main Content</main>
+        <footer class="area-footer">Footer</footer>
+      </div>
+    </div>
+
+    <!-- CSS Decoration Gaps -->
+    <div class="subsection">
+      <h3>↔️ CSS Decoration Gaps</h3>
+      <p class="definition">
+        <!-- DEFINICIÓN: Propiedad gap (row-gap, column-gap) define 
+                     espaciado entre tracks de grid o items de flex -->
+        Controla el espaciado entre filas (<code>row-gap</code>) y columnas
+        (<code>column-gap</code>) sin márgenes adicionales.
+      </p>
+
+      <div class="grid-container gap-grid">
+        <div class="grid-item">1</div>
+        <div class="grid-item">2</div>
+        <div class="grid-item">3</div>
+        <div class="grid-item">4</div>
+      </div>
+    </div>
+
+    <!-- Celdas irregulares -->
+    <div class="subsection">
+      <h3>🔷 Celdas Irregulares</h3>
+      <p class="definition">
+        <!-- DEFINICIÓN: Items pueden expandirse múltiples tracks usando 
+                     grid-column, grid-row o grid-area -->
+        Items que ocupan múltiples celdas usando <code>grid-column: span 2</code>
+        o líneas específicas <code>grid-area: 1 / 1 / 3 / 3</code>.
+      </p>
+
+      <div class="grid-container irregular-grid">
+        <div class="grid-item span-2">Span 2 cols</div>
+        <div class="grid-item">Normal</div>
+        <div class="grid-item span-row-2">Span 2 rows</div>
+        <div class="grid-item">Normal</div>
+        <div class="grid-item">Normal</div>
+      </div>
+    </div>
+
+    <!-- Líneas con nombre -->
+    <div class="subsection">
+      <h3>🏷️ Líneas con Nombre en Grid</h3>
+      <p class="definition">
+        <!-- DEFINICIÓN: Las líneas del grid pueden nombrarse en 
+                     grid-template-columns/rows para posicionamiento semántico -->
+        Nombra líneas en <code>grid-template-columns: [sidebar-start] 200px [sidebar-end]</code>
+        para posicionar items por nombre.
+      </p>
+
+      <div class="grid-container named-lines-grid">
+        <div class="grid-item content">Content</div>
+        <div class="grid-item sidebar">Sidebar</div>
+      </div>
+    </div>
+
+    <!-- Colocación automática -->
+    <div class="subsection">
+      <h3>🤖 Colocación Automática</h3>
+      <p class="definition">
+        <!-- DEFINICIÓN: Grid-auto-flow controla cómo se colocan items 
+                     no posicionados explícitamente (row, column, dense) -->
+        <code>grid-auto-flow: dense</code> rellena huecos automáticamente;
+        <code>grid-auto-rows/columns</code> define tamaño de tracks implícitos.
+      </p>
+
+      <div class="grid-container auto-grid">
+        <div class="grid-item tall">1</div>
+        <div class="grid-item">2</div>
+        <div class="grid-item wide">3</div>
+        <div class="grid-item">4</div>
+        <div class="grid-item">5</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================
+         SECCIÓN: POSICIONAMIENTO CSS
+         ============================================ -->
+  <section id="posicionamiento" class="section">
+    <h2>📍 Posicionamiento CSS</h2>
+    <p class="definition">
+      <!-- DEFINICIÓN: Sistema de posicionamiento que extrae elementos 
+                 del flujo normal para ubicarlos en coordenadas específicas -->
+      Extrae elementos del flujo normal para posicionarlos relativamente a su
+      contenedor o viewport usando coordenadas (top, left, right, bottom).
+    </p>
+
+    <!-- Propiedad position -->
+    <div class="subsection">
+      <h3>⚙️ La propiedad position</h3>
+      <p class="definition">
+        <!-- DEFINICIÓN: Valores: static (default), relative, absolute, 
+                     fixed, sticky. Cada uno define un contexto de posicionamiento diferente -->
+        Valores: <code>static</code> (flujo normal), <code>relative</code> (relativo a sí mismo),
+        <code>absolute</code> (relativo a ancestro posicionado),
+        <code>fixed</code> (relativo a viewport), <code>sticky</code> (híbrido).
+      </p>
+    </div>
+
+    <!-- Posicionamiento relativo -->
+    <div class="subsection">
+      <h3>↔️ Posicionamiento Relativo</h3>
+      <p class="definition">
+        <!-- DEFINICIÓN: Elemento conserva su espacio en el flujo pero 
+                     se desplaza desde su posición normal -->
+        Conserva espacio en flujo; se desplaza con <code>top/left/right/bottom</code>
+        sin afectar a otros elementos.
+      </p>
+
+      <div class="position-demo">
+        <div class="pos-box static">Static</div>
+        <div class="pos-box relative">Relative (moved 20px)</div>
+        <div class="pos-box static">Static</div>
+      </div>
+    </div>
+
+    <!-- Posicionamiento absoluto -->
+    <div class="subsection">
+      <h3>📌 Posicionamiento Absoluto</h3>
+      <p class="definition">
+        <!-- DEFINICIÓN: Elemento se remueve del flujo; se posiciona 
+                     relativo a su ancestro posicionado más cercano -->
+        Se remueve del flujo; contexto de posicionamiento es el ancestro
+        con <code>position</code> diferente a <code>static</code>.
+      </p>
+
+      <div class="position-demo relative-container">
+        <div class="pos-box absolute">Absolute (top: 20px, right: 20px)</div>
+        <div class="pos-box static-in-container">Static hermano</div>
+      </div>
+    </div>
+
+    <!-- Posicionamiento fijo -->
+    <div class="subsection">
+      <h3>🔒 Posicionamiento Fijo</h3>
+      <p class="definition">
+        <!-- DEFINICIÓN: Similar a absolute pero relativo al viewport; 
+                     no se mueve al hacer scroll -->
+        Relativo al viewport; permanece fijo durante scroll. Útil para
+        headers, botones flotantes o chat widgets.
+      </p>
+
+      <div class="fixed-demo-box">Fixed Box (esquina inferior derecha)</div>
+    </div>
+
+    <!-- Posicionamiento sticky -->
+    <div class="subsection">
+      <h3>🍯 Posicionamiento Sticky</h3>
+      <p class="definition">
+        <!-- DEFINICIÓN: Híbrido entre relative y fixed; actúa como relative 
+                     hasta que cruza un umbral de scroll, entonces se vuelve fixed -->
+        Comportamiento híbrido: fluye normalmente hasta alcanzar umbral
+        (<code>top: 0</code>), luego se adhiere al viewport.
+      </p>
+
+      <div class="sticky-container">
+        <div class="sticky-header">Header Sticky (scroll down ↓)</div>
+        <div class="sticky-content">
+          <p>Contenido largo para demostrar sticky...</p>
+          <p>Lorem ipsum dolor sit amet...</p>
+          <p>Consectetur adipiscing elit...</p>
+          <p>Sed do eiusmod tempor...</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================
+         SECCIÓN: CSS ANCHOR POSITIONING
+         ============================================ -->
+  <section id="anchor" class="section">
+    <h2>⚓ CSS Anchor Positioning</h2>
+    <p class="definition">
+      <!-- DEFINICIÓN: API moderna (2024) para posicionar elementos 
+                 relativos a otros elementos "ancla" sin JavaScript -->
+      API experimental para posicionar elementos relativos a un ancla (<code>anchor-name</code>)
+      usando funciones <code>anchor()</code> y <code>anchor-size()</code> [^3^][^5^].
+    </p>
+
+    <div class="anchor-demo-container">
+      <button class="anchor-button" id="anchorBtn" style="anchor-name: --anchor-el;">
+        Botón Ancla ⚓
+      </button>
+
+      <div class="anchored-tooltip" style="position-anchor: --anchor-el;">
+        Tooltip anclado al botón usando CSS Anchor Positioning API
+      </div>
+    </div>
+
+    <div class="support-notice">
+      <p>⚠️ <strong>Nota:</strong> CSS Anchor Positioning requiere Chrome 125+ o Edge 125+.
+        En navegadores no soportados, el tooltip se muestra como posicionamiento absoluto tradicional.</p>
+    </div>
+  </section>
+
+  <footer class="main-footer">
+     <span class="footer-tag">
+        <a style="text-decoration: none;" href="https://desingdata.github.io/desingdata/" target="_blank">Desing Data</a> 2026
+    </span> 
+    <span class="footer-tag">
+         ·By <a style="text-decoration: none;" href="https://miguelmauricioriveralopez18686.github.io/mrlPortafolio/" target="_blank">
+      Miguel Mauricio Rivera López</a>.
+    </span>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+
+</html>
